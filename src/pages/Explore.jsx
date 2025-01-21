@@ -4,11 +4,11 @@ import Categories from '../components/Categories'
 // import SearchBar from '../ui/SearchBar';
 // import StoryCardMini from '../components/cards/StoryCardMini';
 import PageTitle from '../ui/PageTitle';
-import StoryContext from '../contexts/StoryContext';
+import AppContext from '../contexts/AppContext';
 
 const Explore = () => {
 
-    const { initiateExploreSearch } = useContext(StoryContext);
+    const { initiateExploreSearch } = useContext(AppContext);
 
     return (
         <div className='flex flex-col gap-5 pb-20'>

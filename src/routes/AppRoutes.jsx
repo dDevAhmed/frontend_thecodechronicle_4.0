@@ -1,11 +1,11 @@
 // routes/AppRoutes.jsx  
 import { createBrowserRouter, Outlet } from "react-router-dom"
 import Layout from "../layout/Layout"
-// import PrivateRoutes from './PrivateRoutes'
+import PrivateRoutes from './PrivateRoutes'
 import NotFound from "../pages/NotFound"
 import Home from '../pages/Home'
 import Explore from "../pages/Explore";
-// import Saved from "../pages/Saved"
+import Saved from "../pages/Saved"
 // import Story from '../pages/Story'
 
 const router = createBrowserRouter([
@@ -46,19 +46,19 @@ const router = createBrowserRouter([
             //     path: 'tag/:tag',
             //     element: <Tag />
             // },
-            // {
-            //     element: <PrivateRoutes />,
-            //     children: [
-            //         {
-            //             path: 'saved',
-            //             element: <Saved />
-            //         },
-            //         // {
-            //         //     path: 'account',
-            //         //     element: <Account />
-            //         // },
-            //     ]
-            // },
+            {
+                element: <PrivateRoutes />,
+                children: [
+                    {
+                        path: 'saved',
+                        element: <Saved />
+                    },
+                    // {
+                    //     path: 'account',
+                    //     element: <Account />
+                    // },
+                ]
+            },
         ]
     },
 ]);

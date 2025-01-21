@@ -1,10 +1,33 @@
+/* eslint-disable react/prop-types */
 // import { useContext } from 'react'
 // import { LiaTimesSolid } from "react-icons/lia";
 // import { CiSearch } from "react-icons/ci";
+import { useContext } from "react";
 import { TfiSearch } from "react-icons/tfi";
+import AppContext from "../contexts/AppContext";
 
 export default function SearchBar({ placeholder, classNames }) {
-    // const { setSearchBarVisible, searchQuery, setSearchQuery } = useContext(AppContext)
+    const {
+        setInitiateSavedSearch,
+        searchBarQuery, setSearchBarQuery
+    } = useContext(AppContext)
+
+    const handleSearchBarChange = (e) => {
+        const query = e.target.value;
+
+        // Prevent query from starting with an empty character
+        if (query.startsWith(' ')) {
+            return;
+        }
+
+        setSearchBarQuery(query);
+
+        if (query.trim().length > 2) {
+            setInitiateSavedSearch(true);
+        } else {
+            setInitiateSavedSearch(false);
+        }
+    }
 
     return (
         <div className={`w-full flex items-center gap-2 rounded-md px-3 ${classNames}`}>
@@ -17,8 +40,8 @@ export default function SearchBar({ placeholder, classNames }) {
                 placeholder={placeholder}
                 aria-describedby="searchbar-search"
                 className="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6 bg-transparent"
-            // value={searchQuery}
-            // onChange={(e) => setSearchQuery(e.target.value)}
+                value={searchBarQuery}
+                onChange={handleSearchBarChange}
             // autoFocus
             />
 

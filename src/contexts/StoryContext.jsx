@@ -5,8 +5,6 @@ import { useState, createContext } from 'react';
 export const StoryContext = createContext();
 
 export const StoryProvider = ({ children }) => {
-    // explore page
-    const [initiateExploreSearch, setInitiateExploreSearch] = useState(false)
     // story page
     const [showStoryCommentsModal, setShowStoryCommentsModal] = useState(false)
     const [showStoryCommentSendButton, setShowStoryCommentSendButton] = useState(false);
@@ -16,7 +14,6 @@ export const StoryProvider = ({ children }) => {
             // data,
             // isLoading,
             // error,
-            initiateExploreSearch, setInitiateExploreSearch,
             
             showStoryCommentsModal, setShowStoryCommentsModal,
             showStoryCommentSendButton, setShowStoryCommentSendButton,
