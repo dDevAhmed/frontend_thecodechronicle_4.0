@@ -1,10 +1,11 @@
-import ClipLoader from "react-spinners/ClipLoader";  
+/* eslint-disable react/prop-types */
+import ClipLoader from "react-spinners/ClipLoader";
 
-const Spinner = () => {  
-  return (  
+const Spinner = ({ color }) => {
+  return (
     // fixme - resize on different screen
     <div className="flex items-center justify-center">
-      <ClipLoader color={'#202224'} />  
+      <ClipLoader color={color ? color : '#202224'} />
       {/* <ClipLoader
         color={color}
         loading={loading}
@@ -13,8 +14,8 @@ const Spinner = () => {
         aria-label="Loading Spinner"
         data-testid="loader"
       /> */}
-    </div>  
-  );  
-};  
+    </div>
+  );
+};
 
 export default Spinner;

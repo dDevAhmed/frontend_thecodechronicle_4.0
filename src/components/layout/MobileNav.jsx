@@ -10,7 +10,10 @@ function classNames(...classes) {
 
 const MobileNav = () => {
 
-  const { setShowMobileSearchModal } = useContext(AppContext)
+  const {
+    setShowAuthModal,
+    setShowMobileSearchModal
+  } = useContext(AppContext)
 
   // todos 
   // change like post state
@@ -35,6 +38,12 @@ const MobileNav = () => {
     setShowMobileSearchModal(true)
   };
 
+  const handleGotoProfile = () => {
+    // check if user is sign in, 
+    // else open auth modal
+    setShowAuthModal(true)    //todo - refine logic
+  };
+
   const isNewsOrBlogPage = (pathname) => {
     return pathname.startsWith('/news') || pathname.startsWith('/blog');
   };
@@ -46,7 +55,7 @@ const MobileNav = () => {
     { name: 'explore', href: '/explore', icon: TbCompass, current: false, visible: !isNewsOrBlogPage(location.pathname) },
     { name: 'search', href: '', icon: TbSearch, current: false, visible: !isNewsOrBlogPage(location.pathname), onclick: handleSearch },
     { name: 'saved', href: '/saved', icon: TbBookmark, current: false, visible: true },
-    { name: 'account', href: '', icon: TbUser, current: false, visible: true },
+    { name: 'account', href: '', icon: TbUser, current: false, visible: true, onclick: handleGotoProfile },
   ];
 
   return (
@@ -56,7 +65,7 @@ const MobileNav = () => {
         item.visible && (item.onclick
           ?
           (
-            <button key={index} onClick={item.onclick}>
+            <button key={index} onClick={item.onclick} className='flex items-center gap-x-3 rounded-full py-2 px-3 text-sm leading-6'>
               <item.icon
                 aria-hidden="true"
                 className={classNames(

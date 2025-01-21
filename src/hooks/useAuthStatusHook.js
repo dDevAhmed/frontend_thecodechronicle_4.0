@@ -3,8 +3,11 @@ import { useEffect, useState } from 'react'
 const useAuthStatusHook = () => {
 
     // when user is signed in from service, 
-    // do the user session/cookie here and set the loggedIn status
-    // also handle logged here
+    // do the user session/cookie here 
+    // and set the loggedIn status
+    // also handle log out here
+
+    // logged in checks for session
 
     // note - for test only set to true
     const [loggedIn, setLoggedIn] = useState(true)

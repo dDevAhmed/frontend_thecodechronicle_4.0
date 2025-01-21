@@ -3,7 +3,6 @@
 import { Outlet, useLocation, Link } from "react-router-dom";
 import { GoDotFill } from "react-icons/go";
 import MobileDrawer from '../components/layout/MobileDrawer';
-import SignInModal from "../components/modals/SignInModal";
 import Header from '../components/layout/Header';
 import MobileNav from '../components/layout/MobileNav'
 import Card from "../ui/Card";
@@ -11,6 +10,7 @@ import TrendingTopics from "../components/trendingtopics/TrendingTopics";
 import SubscribeNewsletter from "../components/SubscribeNewsletter";
 import DesktopNavigation from "../components/layout/DesktopNavigation";
 import MobileSearchModal from "../components/modals/MobileSearchModal";
+import AuthModal from "../components/modals/auth/AuthModal";
 
 export default function Layout() {
     const location = useLocation()
@@ -28,7 +28,7 @@ export default function Layout() {
                 <Header />
             </div>
 
-            <SignInModal />
+            <AuthModal />
 
             <MobileSearchModal />
 

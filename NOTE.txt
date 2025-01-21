@@ -7,3 +7,9 @@ fixme
 3. add overlay for medium large search effect
 4. add cancel button for search bar
 5. onclick outside close medium large search results
+6. clear auth forms states when close auth modal
+
+
+
+backend
+register-email - return email entered to avoid mistake by user
