@@ -11,8 +11,8 @@ const StoriesList = () => {
     // filter data to fetch only feed, do in useStoriesHook
     // redo hasMore/fetchMoreStories logic
 
-    const { feed, hasMore, fetchMoreStories } = useContext(StoryContext);
-    const { data, isPending, isError } = useCategories()
+    // const { feed, hasMore, fetchMoreStories } = useContext(StoryContext);
+    // const { data, isPending, isError } = useCategories()
 
     return (
 

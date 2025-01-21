@@ -1,9 +1,11 @@
-import React, { useState, useContext } from 'react'
+import { useState, useContext } from 'react'
 import { useSignIn } from '../../services/auth/SignInService';
 import Modal from '../../ui/Modal'
 import AppContext from "../../contexts/AppContext";
 
 const SignInModal = () => {
+
+    // do the auth check before showing the sign modal
 
     const { showSignInModal, setShowSignInModal, } = useContext(AppContext);
 

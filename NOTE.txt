@@ -1,0 +1,6 @@
+fixme
+1. (mobile drawer = highest z-index ??? then) 
+    sign in modal = highest z-index, 
+    then comments, 
+    then header
+2. 
