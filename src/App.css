@@ -1,42 +1,57 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+/* 8K Screens (6145px and up) */
+@media screen and (max-width: 7680px) {
+  html {
+      font-size: 120px;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+/* 6K Screens (5121px and up) */
+@media screen and (max-width: 6144px) {
+  html {
+      font-size: 80px;
   }
 }
 
-.card {
-  padding: 2em;
+/* 5K Screens (3841px and up) */
+@media screen and (max-width: 5120px) {
+  html {
+      font-size: 65px;
+  }
 }
 
-.read-the-docs {
-  color: #888;
+/* 4K Screens (2049px and up) */
+@media screen and (max-width: 3840px) {
+  html {
+      font-size: 50px;
+  }
+}
+
+@media screen and (max-width: 2048px) {
+  html {
+      font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  html {
+      font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  html {
+      font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  html {
+      font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  html {
+      font-size: 16px;
+  }
 }

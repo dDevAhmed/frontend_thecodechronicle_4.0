@@ -1,3 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --view-all-link: #072635;
+    --nav-opened-title: #E3E4E6;
+}
+
+body::-webkit-scrollbar {
+    width: .3125rem;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: var(--view-all-link);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: var(--nav-opened-title);
+}
+
+div.hide-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+div.patients-slider::-webkit-scrollbar,
+div.lab-results-slider::-webkit-scrollbar {
+    width: .3125rem;
+}
+
+div.patients-slider::-webkit-scrollbar-track,
+div.lab-results-slider::-webkit-scrollbar-track {
+    box-shadow: 0 0 .3125rem grey;
+    border-top-right-radius: .9375rem;
+    border-bottom-right-radius: .9375rem;
+}
+
+div.patients-slider::-webkit-scrollbar-thumb,
+div.lab-results-slider::-webkit-scrollbar-thumb {
+    background: var(--view-all-link);
+    border-radius: .625rem;
+}
