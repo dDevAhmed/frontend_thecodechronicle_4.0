@@ -2,9 +2,9 @@
 import { createBrowserRouter, Outlet } from "react-router-dom"
 import Layout from "../layout/Layout"
 // import PrivateRoutes from './PrivateRoutes'
-import Home from '../pages/Home'
 import NotFound from "../pages/NotFound"
-// import Explore from "../pages/Explore";
+import Home from '../pages/Home'
+import Explore from "../pages/Explore";
 // import Saved from "../pages/Saved"
 // import Story from '../pages/Story'
 
@@ -30,10 +30,10 @@ const router = createBrowserRouter([
             //     path: 'news/:id',       //news/{slugified-title}
             //     element: <Story />
             // },
-            // {
-            //     path: 'explore',
-            //     element: <Explore />
-            // },
+            {
+                path: 'explore',
+                element: <Explore />
+            },
             // {
             //     path: 'blogs',
             //     element: <Blogs />

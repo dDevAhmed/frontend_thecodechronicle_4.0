@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { useState, createContext, useEffect } from 'react';
-import useStoryHook from '../hooks/useStoryHook';
+import { useState, createContext } from 'react';
 
 export const StoryContext = createContext();
 

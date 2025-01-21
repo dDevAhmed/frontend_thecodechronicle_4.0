@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-// import Categories from '../components/Categories'
+import Categories from '../components/Categories'
 // import Card from '../ui/Card';
 // import SearchBar from '../ui/SearchBar';
 // import StoryCardMini from '../components/cards/StoryCardMini';
@@ -8,14 +8,14 @@ import StoryContext from '../contexts/StoryContext';
 
 const Explore = () => {
 
-    const { initiateExploreSearch } = useContext(StoryContext)
+    const { initiateExploreSearch } = useContext(StoryContext);
 
     return (
         <div className='flex flex-col gap-5 pb-20'>
 
             <PageTitle>Explore</PageTitle>
 
-            {/* <Categories /> */}
+            <Categories />
 
             {/* //todo - only show if search is initiated */}
             <div className={`flex items-center justify-between ${!initiateExploreSearch && 'hidden'}`}>
