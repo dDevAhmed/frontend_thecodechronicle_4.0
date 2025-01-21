@@ -8,7 +8,7 @@ import AppContext from '../contexts/AppContext';
 
 const Saved = () => {
 
-  const { initiateSavedSearch } = useContext(AppContext)
+  const { initiateSavedSearch, setInitiateSavedSearch } = useContext(AppContext)
 
   return (
     <div className='flex flex-col gap-5 pb-20'>
@@ -16,7 +16,7 @@ const Saved = () => {
       <PageTitle>Saved</PageTitle>
 
       <Card classNames={'p-1 bg-white rounded-2xl'}>
-        <SearchBar placeholder={'Search from saved posts'}/>
+        <SearchBar placeholder={'Search from saved posts'} state={true} setState={setInitiateSavedSearch}/>
       </Card>
 
       {/* //todo - only show if search is initiated */}

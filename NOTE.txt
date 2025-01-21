@@ -3,4 +3,4 @@ fixme
     sign in modal = highest z-index, 
     then comments, 
     then header
-2. 
+2. searchbar should be independent

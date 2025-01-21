@@ -9,23 +9,29 @@ export const AppProvider = ({ children }) => {
 
     const [showSignInModal, setShowSignInModal] = useState(false)
     const [openMobileDrawer, setOpenMobileDrawer] = useState(false)
+    
     const [searchBarQuery, setSearchBarQuery] = useState('')
-
+    const [showMobileSearchModal, setShowMobileSearchModal] = useState(false)     //for mobile nav search icon
+    const [showMobileSearchResults, setShowMobileSearchResults] = useState(false)     //for mobile nav search icon
+    const [showMediumLargeSearchResults, setShowMediumLargeSearchResults] = useState(false)     //for tab and desktop
+    
     // explore page
     const [initiateExploreSearch, setInitiateExploreSearch] = useState(false)
     // saved page
     const [initiateSavedSearch, setInitiateSavedSearch] = useState(false)
     
-    const [searchBarVisible, setSearchBarVisible] = useState(false)
-    const [showPostCommentsModal, setShowPostCommentsModal] = useState(false);
-
     return (
         <AppContext.Provider value={{
             showSignInModal, setShowSignInModal,
             openMobileDrawer, setOpenMobileDrawer,
-            searchBarQuery, setSearchBarQuery,
 
+            searchBarQuery, setSearchBarQuery,
+            showMobileSearchModal, setShowMobileSearchModal,
+            showMobileSearchResults, setShowMobileSearchResults,
+            showMediumLargeSearchResults, setShowMediumLargeSearchResults,
+            
             initiateExploreSearch, setInitiateExploreSearch,
+            
             initiateSavedSearch, setInitiateSavedSearch,
         }}>
             {children}

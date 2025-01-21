@@ -6,9 +6,8 @@ import { useContext } from "react";
 import { TfiSearch } from "react-icons/tfi";
 import AppContext from "../contexts/AppContext";
 
-export default function SearchBar({ placeholder, classNames }) {
+export default function SearchBar({ placeholder, classNames, state, setState }) {
     const {
-        setInitiateSavedSearch,
         searchBarQuery, setSearchBarQuery
     } = useContext(AppContext)
 
@@ -23,10 +22,11 @@ export default function SearchBar({ placeholder, classNames }) {
         setSearchBarQuery(query);
 
         if (query.trim().length > 2) {
-            setInitiateSavedSearch(true);
+            setState(state)
         } else {
-            setInitiateSavedSearch(false);
+            setState(!state)
         }
+
     }
 
     return (

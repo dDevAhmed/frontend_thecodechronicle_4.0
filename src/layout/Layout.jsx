@@ -10,6 +10,7 @@ import Card from "../ui/Card";
 import TrendingTopics from "../components/trendingtopics/TrendingTopics";
 import SubscribeNewsletter from "../components/SubscribeNewsletter";
 import DesktopNavigation from "../components/layout/DesktopNavigation";
+import MobileSearchModal from "../components/modals/MobileSearchModal";
 
 export default function Layout() {
     const location = useLocation()
@@ -21,13 +22,15 @@ export default function Layout() {
 
     return (
         <div className='w-full'>
-            < MobileDrawer />
+            <MobileDrawer />
 
             <div className={`${isNewsOrBlogPage(location.pathname) && 'hidden md:flex'} sticky top-0 z-40`}>
                 <Header />
             </div>
 
             <SignInModal />
+
+            <MobileSearchModal />
 
             <div className="flex gap-5 w-full items-start bg-brand-background-gray px-[1.125rem] md:grid md:grid-cols-3 lg:grid lg:grid-cols-4">
                 <aside className="sticky top-[6.75rem] hidden md:flex md:flex-col md:h-[80vh] overflow-y-auto gap-5 md:col-span-1 lg:col-span-1 shrink-0">

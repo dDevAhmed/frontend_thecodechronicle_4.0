@@ -9,9 +9,13 @@ import AppContext from "../../contexts/AppContext";
 import AppLogo from '../../assets/images/TestLogo.png'
 import Button from "../../ui/Button";
 import SearchBar from '../../ui/SearchBar'
+import Card from "../../ui/Card";
 
 const Header = () => {
-    const { setOpenMobileDrawer } = useContext(AppContext)
+    const {
+        setOpenMobileDrawer,
+        showMediumLargeSearchResults, setShowMediumLargeSearchResults
+    } = useContext(AppContext)
 
     return (
         <header className="bg-brand-background-gray shrink-0 p-[1.125rem] w-full">
@@ -37,8 +41,16 @@ const Header = () => {
                     </span>
                 </div>
 
-                <div className='hidden md:flex flex-1'>
-                    <SearchBar placeholder={'Search for something...'} classNames={'bg-gray-100 w-full lg:w-1/2 m-auto'} />
+                <div className='hidden md:flex flex-1 relative'>
+                    <SearchBar placeholder={'Search for something...'}
+                        classNames={'bg-gray-100 w-full lg:w-1/2 m-auto'}
+                        state={true} setState={setShowMediumLargeSearchResults} />
+
+                    <Card classNames={`bg-gray-100 rounded-b-2xl max-h-80 overflow-y-auto px-5 py-3 absolute top-10 left-1/2 transform -translate-x-1/2 w-full lg:w-1/2 theme-slider ${showMediumLargeSearchResults ? 'flex' : 'hidden'}`}>
+                        {/* todo - if results ? show : no results for matched query */}
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur a hic eveniet ea inventore quos repellendus ipsa repellat dolore maiores, eaque culpa consequatur possimus doloribus. Similique et excepturi consectetur fugit? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae voluptatem suscipit ducimus aliquam placeat officiis rem error, quidem provident obcaecati at necessitatibus molestias cum eaque nisi animi in voluptates? Est! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis nam eveniet praesentium a repellendus ad omnis, amet et explicabo molestiae? Labore quos atque amet modi nostrum reiciendis corporis temporibus tempore. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum porro vero odit doloremque eum quasi atque cumque. Error praesentium cumque quo aliquam assumenda. Fugit voluptatem, velit similique voluptatum inventore tenetur!
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur a hic eveniet ea inventore quos repellendus ipsa repellat dolore maiores, eaque culpa consequatur possimus doloribus. Similique et excepturi consectetur fugit? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae voluptatem suscipit ducimus aliquam placeat officiis rem error, quidem provident obcaecati at necessitatibus molestias cum eaque nisi animi in voluptates? Est! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis nam eveniet praesentium a repellendus ad omnis, amet et explicabo molestiae? Labore quos atque amet modi nostrum reiciendis corporis temporibus tempore. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum porro vero odit doloremque eum quasi atque cumque. Error praesentium cumque quo aliquam assumenda. Fugit voluptatem, velit similique voluptatum inventore tenetur!
+                    </Card>
                 </div>
 
                 <div className="flex items-center gap-x-2">
@@ -67,7 +79,7 @@ const Header = () => {
                     </span> */}
                 </div>
             </div>
-        </header>
+        </header >
     )
 }
 

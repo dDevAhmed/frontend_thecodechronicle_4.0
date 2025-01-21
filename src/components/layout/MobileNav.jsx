@@ -1,14 +1,17 @@
-import React from 'react'
+import { useContext } from 'react'
 import Card from '../../ui/Card'
-import { TbSmartHome, TbBookmark, TbUser, TbThumbUp, TbShare, TbShare2, TbSearch, TbCompass } from "react-icons/tb";
-import { HiOutlineFire } from "react-icons/hi";
+import { TbSmartHome, TbBookmark, TbUser, TbThumbUp, TbShare, TbSearch, TbCompass } from "react-icons/tb";
 import { Link, useLocation } from 'react-router-dom';
+import AppContext from '../../contexts/AppContext';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 const MobileNav = () => {
+
+  const { setShowMobileSearchModal } = useContext(AppContext)
+
   // todos 
   // change like post state
   // first check if user is auth ? like post : show modal asking user to login and like post
@@ -29,7 +32,7 @@ const MobileNav = () => {
   };
 
   const handleSearch = () => {
-    alert('open search modal');
+    setShowMobileSearchModal(true)
   };
 
   const isNewsOrBlogPage = (pathname) => {
@@ -50,28 +53,44 @@ const MobileNav = () => {
     // fixme - add in mobile - w-[100vw]
     <Card classNames={'bg-white py-3 px-5 flex justify-between items-center gap-1 border border-t-brand-primary-blue'}>
       {navigation.map((item, index) => (
-        <Link
-          key={index}
-          to={item.href}
-          className={classNames(
-            'text-[#072635] hover:bg-[01F0D0]',
-            `flex items-center gap-x-3 rounded-full py-2 px-3 text-sm leading-6 ${!item.visible && 'hidden'}`,
-          )}
-          onclick={item.onclick && item.onclick}
-        >
-          <item.icon
-            aria-hidden="true"
-            className={classNames(
-              location.pathname === item.href
-                ? 'text-brand-primary-blue'
-                : 'text-brand-primary-black group-hover:text-brand-primary-blue',
-              'h-6 w-auto shrink-0',
-            )}
-          />
-          {/* {item.name} */}
-        </Link>
-      ))}
-    </Card>
+        item.visible && (item.onclick
+          ?
+          (
+            <button key={index} onClick={item.onclick}>
+              <item.icon
+                aria-hidden="true"
+                className={classNames(
+                  location.pathname === item.href
+                    ? 'text-brand-primary-blue'
+                    : 'text-brand-primary-black group-hover:text-brand-primary-blue',
+                  'h-6 w-auto shrink-0',
+                )}
+              />
+            </button>
+          )
+          :
+          <Link
+            key={index}
+            to={item.href}
+            className={
+              classNames(
+                'text-[#072635] hover:bg-[01F0D0]',
+                `flex items-center gap-x-3 rounded-full py-2 px-3 text-sm leading-6 ${!item.visible && 'hidden'}`,
+              )}
+          >
+            <item.icon
+              aria-hidden="true"
+              className={classNames(
+                location.pathname === item.href
+                  ? 'text-brand-primary-blue'
+                  : 'text-brand-primary-black group-hover:text-brand-primary-blue',
+                'h-6 w-auto shrink-0',
+              )}
+            />
+          </Link>)
+      ))
+      }
+    </Card >
   )
 }
 
