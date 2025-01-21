@@ -1,8 +1,7 @@
 import { useState, useContext } from 'react'
 import { useSignUp } from '../../../services/auth/SignUpService';
-import Modal from '../../../ui/Modal'
 import Spinner from '../../../ui/Spinner'
-import AppContext from "../../../contexts/AppContext";
+import AuthContext from "../../../contexts/AuthContext";
 
 const SignUpForm = () => {
 
@@ -18,7 +17,7 @@ const SignUpForm = () => {
         showRegisterEmailForm, setShowRegisterEmailForm,
         showVerifyEmailForm, setShowVerifyEmailForm,
         showSignUpForm, setShowSignUpForm
-    } = useContext(AppContext);
+    } = useContext(AuthContext);
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');

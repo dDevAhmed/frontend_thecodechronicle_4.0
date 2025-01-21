@@ -1,7 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useContext } from 'react';
 import AuthContext from '../../contexts/AuthContext';
-import AppContext from '../../contexts/AppContext';
 
 const api = import.meta.env.VITE_API_URL
 
@@ -30,7 +29,7 @@ const signUp = async ({ firstName, lastName, email, password }) => {
 export const useSignUp = () => {
 
     const { login } = useContext(AuthContext);
-    const { setShowAuthModal } = useContext(AppContext);
+    const { setShowAuthModal } = useContext(AuthContext);
 
     return useMutation({
         mutationFn: signUp,

@@ -4,7 +4,7 @@ import RegisterEmailForm from './RegisterEmailForm';
 import VerifyEmailForm from './VerifyEmailForm';
 import SignUpForm from './SignUpForm';
 import SignInForm from './SignInForm';
-import AppContext from '../../../contexts/AppContext';
+import AuthContext from '../../../contexts/AuthContext';
 
 const AuthModal = () => {
 
@@ -14,7 +14,7 @@ const AuthModal = () => {
         showRegisterEmailForm,
         showVerifyEmailForm,
         showSignUpForm
-    } = useContext(AppContext);
+    } = useContext(AuthContext);
 
     return (
         <Modal showModal={showAuthModal} setShowModal={setShowAuthModal}>

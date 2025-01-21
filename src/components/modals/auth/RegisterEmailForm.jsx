@@ -1,14 +1,14 @@
 import { useContext, useState } from 'react'
 import { useRegisterEmail } from '../../../services/auth/RegisterEmailService';
 import Spinner from '../../../ui/Spinner';
-import AppContext from '../../../contexts/AppContext';
+import AuthContext from '../../../contexts/AuthContext';
 
 const RegisterEmailForm = () => {
     // do the auth check before showing the sign in modal
     // make into different component - sign in, sign up, otp
     // when switch to otp form, disable click outside to close modal
 
-    const { setShowSignInForm, setShowRegisterEmailForm } = useContext(AppContext)
+    const { setShowSignInForm, setShowRegisterEmailForm } = useContext(AuthContext)
 
     const [email, setEmail] = useState('');
 

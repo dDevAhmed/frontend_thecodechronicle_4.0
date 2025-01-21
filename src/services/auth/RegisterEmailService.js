@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useContext } from 'react';
-import AppContext from '../../contexts/AppContext';
+import AuthContext from '../../contexts/AuthContext';
 
 const api = import.meta.env.VITE_API_URL
 
@@ -28,7 +28,7 @@ const registerEmail = async ({ email }) => {
 };
 
 export const useRegisterEmail = () => {
-    const { showRegisterEmailForm, setShowVerifyEmailForm } = useContext(AppContext);
+    const { showRegisterEmailForm, setShowVerifyEmailForm } = useContext(AuthContext);
 
     return useMutation({
         mutationFn: registerEmail,

@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react'
 import { useSignIn } from '../../../services/auth/SignInService';
-import AppContext from "../../../contexts/AppContext";
+import AuthContext from "../../../contexts/AuthContext";
 import Spinner from '../../../ui/Spinner';
 
 const SignInForm = () => {
@@ -15,7 +15,7 @@ const SignInForm = () => {
         showRegisterEmailForm, setShowRegisterEmailForm,
         showVerifyEmailForm, setShowVerifyEmailForm,
         showSignUpForm, setShowSignUpForm,
-    } = useContext(AppContext)
+    } = useContext(AuthContext)
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

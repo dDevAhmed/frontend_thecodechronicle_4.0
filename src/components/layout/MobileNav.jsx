@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import Card from '../../ui/Card'
 import { TbSmartHome, TbBookmark, TbUser, TbThumbUp, TbShare, TbSearch, TbCompass } from "react-icons/tb";
 import { Link, useLocation } from 'react-router-dom';
+import AuthContext from '../../contexts/AuthContext';
 import AppContext from '../../contexts/AppContext';
 
 function classNames(...classes) {
@@ -10,10 +11,8 @@ function classNames(...classes) {
 
 const MobileNav = () => {
 
-  const {
-    setShowAuthModal,
-    setShowMobileSearchModal
-  } = useContext(AppContext)
+  const { setShowAuthModal } = useContext(AuthContext)
+  const { setShowMobileSearchModal } = useContext(AppContext)
 
   // todos 
   // change like post state
