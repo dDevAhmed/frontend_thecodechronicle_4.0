@@ -1,19 +1,15 @@
-// import StoriesList from '../components/story/StoriesList';
-// import HeadlinesList from '../components/headlines/HeadlinesList';
-// import SignInModal from '../components/modals/SignInModal';
+import StoriesList from '../components/story/StoriesList';
+import HeadlinesList from '../components/headlines/HeadlinesList';
 
 const Home = () => {
 
   return (
     <div className="flex flex-col gap-5 pb-10">
       {/* headlines */}
-      {/* <HeadlinesList /> */}
+      <HeadlinesList />
 
       {/* feed */}
-      {/* <StoriesList /> */}
-
-      {/* <SignInModal /> */}
-      <p>Hello home</p>
+      <StoriesList />
     </div>
   );
 };

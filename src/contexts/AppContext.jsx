@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { useState, createContext, useEffect } from 'react';
 
 export const AppContext = createContext();

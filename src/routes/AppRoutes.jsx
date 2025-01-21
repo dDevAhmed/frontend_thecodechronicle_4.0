@@ -4,7 +4,7 @@ import Layout from "../layout/Layout"
 // import PrivateRoutes from './PrivateRoutes'
 import Home from '../pages/Home'
 import NotFound from "../pages/NotFound"
-// import Explore from "../pages/Explore"
+// import Explore from "../pages/Explore";
 // import Saved from "../pages/Saved"
 // import Story from '../pages/Story'
 

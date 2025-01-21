@@ -1,6 +1,3 @@
-import React from 'react'
-import { PiPulse, PiToolbox, PiBrowser, PiDatabase, PiChartLine, PiBrain, PiRobot, PiShieldCheck, PiDeviceMobile, PiGlobe, PiUsers, PiCube } from "react-icons/pi";
-import { HiOutlineComputerDesktop } from "react-icons/hi2";
 import Button from '../ui/Button'
 import { getCategoryDetails } from '../utils/category';
 import { useCategories } from "../services/CategoryService"

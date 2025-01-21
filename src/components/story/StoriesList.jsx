@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { lazy, Suspense } from 'react';
 import Spinner from '../../ui/Spinner';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import StoryContext from '../../contexts/StoryContext';
+// import StoryContext from '../../contexts/StoryContext';
 
 const LazyStoryCardMaxi = lazy(() => import('../cards/StoryCardMaxi'));
 
@@ -10,9 +10,9 @@ const StoriesList = () => {
 
     // filter data to fetch only feed, do in useStoriesHook
     // redo hasMore/fetchMoreStories logic
+    // const { data, isPending, isError } = useStories()
 
     // const { feed, hasMore, fetchMoreStories } = useContext(StoryContext);
-    // const { data, isPending, isError } = useCategories()
 
     return (
 
