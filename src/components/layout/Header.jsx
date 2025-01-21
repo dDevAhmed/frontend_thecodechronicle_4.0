@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link, useLocation } from "react-router-dom";
 import { HiOutlineBell } from "react-icons/hi2";
@@ -16,6 +16,8 @@ const Header = () => {
         setOpenMobileDrawer,
         showMediumLargeSearchResults, setShowMediumLargeSearchResults
     } = useContext(AppContext)
+
+    const [headerSearchBarQuery, setHeaderSearchBarQuery] = useState('');
 
     return (
         <header className="bg-brand-background-gray shrink-0 p-[1.125rem] w-full">
@@ -43,11 +45,14 @@ const Header = () => {
 
                 <div className='hidden md:flex flex-1 relative'>
                     <SearchBar placeholder={'Search for something...'}
-                        classNames={'bg-gray-100 w-full lg:w-1/2 m-auto'}
-                        state={true} setState={setShowMediumLargeSearchResults} />
+                        classNames={'bg-gray-100 w-full lg:w-2/3 m-auto'}
+                        state={true} setState={setShowMediumLargeSearchResults}
+                        searchBarQuery={headerSearchBarQuery}
+                        setSearchBarQuery={setHeaderSearchBarQuery} />
 
-                    <Card classNames={`bg-gray-100 rounded-b-2xl max-h-80 overflow-y-auto px-5 py-3 absolute top-10 left-1/2 transform -translate-x-1/2 w-full lg:w-1/2 theme-slider ${showMediumLargeSearchResults ? 'flex' : 'hidden'}`}>
+                    <Card classNames={`bg-gray-100 rounded-b-2xl max-h-80 overflow-y-auto px-5 py-3 absolute top-10 left-1/2 transform -translate-x-1/2 w-full lg:w-2/3 theme-slider ${showMediumLargeSearchResults ? 'flex' : 'hidden'}`}>
                         {/* todo - if results ? show : no results for matched query */}
+                        {/* //todo - create result item */}
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur a hic eveniet ea inventore quos repellendus ipsa repellat dolore maiores, eaque culpa consequatur possimus doloribus. Similique et excepturi consectetur fugit? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae voluptatem suscipit ducimus aliquam placeat officiis rem error, quidem provident obcaecati at necessitatibus molestias cum eaque nisi animi in voluptates? Est! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis nam eveniet praesentium a repellendus ad omnis, amet et explicabo molestiae? Labore quos atque amet modi nostrum reiciendis corporis temporibus tempore. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum porro vero odit doloremque eum quasi atque cumque. Error praesentium cumque quo aliquam assumenda. Fugit voluptatem, velit similique voluptatum inventore tenetur!
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur a hic eveniet ea inventore quos repellendus ipsa repellat dolore maiores, eaque culpa consequatur possimus doloribus. Similique et excepturi consectetur fugit? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae voluptatem suscipit ducimus aliquam placeat officiis rem error, quidem provident obcaecati at necessitatibus molestias cum eaque nisi animi in voluptates? Est! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis nam eveniet praesentium a repellendus ad omnis, amet et explicabo molestiae? Labore quos atque amet modi nostrum reiciendis corporis temporibus tempore. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum porro vero odit doloremque eum quasi atque cumque. Error praesentium cumque quo aliquam assumenda. Fugit voluptatem, velit similique voluptatum inventore tenetur!
                     </Card>

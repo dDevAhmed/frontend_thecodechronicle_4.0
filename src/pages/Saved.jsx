@@ -3,12 +3,13 @@ import Card from '../ui/Card';
 import SearchBar from '../ui/SearchBar';
 // import StoryCardMini from '../components/cards/StoryCardMini';
 import PageTitle from '../ui/PageTitle';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import AppContext from '../contexts/AppContext';
 
 const Saved = () => {
 
   const { initiateSavedSearch, setInitiateSavedSearch } = useContext(AppContext)
+  const [savedSearchBarQuery, setSavedSearchBarQuery] = useState('');
 
   return (
     <div className='flex flex-col gap-5 pb-20'>
@@ -16,7 +17,9 @@ const Saved = () => {
       <PageTitle>Saved</PageTitle>
 
       <Card classNames={'p-1 bg-white rounded-2xl'}>
-        <SearchBar placeholder={'Search from saved posts'} state={true} setState={setInitiateSavedSearch}/>
+        <SearchBar placeholder={'Search from saved posts'} state={true} setState={setInitiateSavedSearch}
+          searchBarQuery={savedSearchBarQuery}
+          setSearchBarQuery={setSavedSearchBarQuery} />
       </Card>
 
       {/* //todo - only show if search is initiated */}

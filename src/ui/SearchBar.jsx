@@ -2,14 +2,12 @@
 // import { useContext } from 'react'
 // import { LiaTimesSolid } from "react-icons/lia";
 // import { CiSearch } from "react-icons/ci";
-import { useContext } from "react";
 import { TfiSearch } from "react-icons/tfi";
-import AppContext from "../contexts/AppContext";
 
-export default function SearchBar({ placeholder, classNames, state, setState }) {
-    const {
-        searchBarQuery, setSearchBarQuery
-    } = useContext(AppContext)
+export default function SearchBar({ placeholder, classNames, state, setState, searchBarQuery, setSearchBarQuery }) {
+    // const {
+    //     searchBarQuery, setSearchBarQuery
+    // } = useContext(AppContext)
 
     const handleSearchBarChange = (e) => {
         const query = e.target.value;
