@@ -1,6 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import AuthContext from '../contexts/AuthContext';
 
 const useAuthStatusHook = () => {
+
+    const { authToken, authUser, logout } = useContext(AuthContext);
 
     // when user is signed in from service, 
     // do the user session/cookie here 
@@ -10,21 +13,17 @@ const useAuthStatusHook = () => {
     // logged in checks for session
 
     // note - for test only set to true
-    const [loggedIn, setLoggedIn] = useState(true)
-    const [checkStatus, setCheckStatus] = useState(true)
+    const [loggedIn, setLoggedIn] = useState(false)
+    // const [checkStatus, setCheckStatus] = useState(true)
 
-    // useEffect(() => {
-    //     const auth = getAuth()
-    //     onAuthStateChanged(auth, (user) => {
-    //         if (user) {
-    //             setLoggedIn(true)
-    //         }
-    //         setCheckStatus(false)
-    //     })
+    useEffect(() => {
+        if (authToken) {
+            setLoggedIn(true)
+        }
 
-    // }, [])
+    }, [authToken])
 
-    return { loggedIn, checkStatus }
+    return { loggedIn }
 }
 
 export default useAuthStatusHook

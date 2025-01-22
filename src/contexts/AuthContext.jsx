@@ -14,14 +14,14 @@ export const AuthProvider = ({ children }) => {
     const [showSignUpForm, setShowSignUpForm] = useState(false)
 
     const [authToken, setAuthToken] = useState(localStorage.getItem('access_token') || '');
-    const [user, setUser] = useState(null);
+    const [authUser, setAuthUser] = useState(null);
 
     useEffect(() => {
         if (authToken) {
             const decodedToken = jwtDecode(authToken);
-            setUser(decodedToken);
+            setAuthUser(decodedToken);
         } else {
-            setUser(null);
+            setAuthUser(null);
         }
     }, [authToken]);
 
@@ -29,13 +29,21 @@ export const AuthProvider = ({ children }) => {
         setAuthToken(token);
         localStorage.setItem('access_token', token);
         const decodedToken = jwtDecode(token);
-        setUser(decodedToken);
+        setAuthUser(decodedToken);
     };
 
     const logout = () => {
         setAuthToken('');
         localStorage.removeItem('access_token');
-        setUser(null);
+        setAuthUser(null);
+    };
+
+    // const hasRole = (role) => {
+    //     return user?.roles?.includes(role);
+    // };
+
+    const hasRole = (role) => {
+        return authUser?.role === role;
     };
 
     return (
@@ -46,7 +54,7 @@ export const AuthProvider = ({ children }) => {
             showVerifyEmailForm, setShowVerifyEmailForm,
             showSignUpForm, setShowSignUpForm,
             
-            authToken, user, login, logout
+            authToken, authUser, login, logout, hasRole,
         }}>
             {children}
         </AuthContext.Provider>

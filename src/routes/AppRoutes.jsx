@@ -3,9 +3,12 @@ import { createBrowserRouter, Outlet } from "react-router-dom"
 import Layout from "../layout/Layout"
 import PrivateRoutes from './PrivateRoutes'
 import NotFound from "../pages/NotFound"
+import UnauthorizedResource from "../pages/UnauthorizedResource"
 import Home from '../pages/Home'
 import Explore from "../pages/Explore";
 import Saved from "../pages/Saved"
+import ProtectedRoutes from "./ProtectedRoutes"
+import CreateStory from "../pages/admin/CreateStory"
 // import Story from '../pages/Story'
 
 const router = createBrowserRouter([
@@ -13,6 +16,10 @@ const router = createBrowserRouter([
     {
         path: '/*',
         element: <NotFound />
+    },
+    {
+        path: '/unauthorized',
+        element: <UnauthorizedResource />
     },
     {
         path: '/',
@@ -27,6 +34,7 @@ const router = createBrowserRouter([
             //     element: <Story />
             // },
             // {
+            //     path: 'story/:id',       //news/{slugified-title}
             //     path: 'news/:id',       //news/{slugified-title}
             //     element: <Story />
             // },
@@ -57,6 +65,16 @@ const router = createBrowserRouter([
                     //     path: 'account',
                     //     element: <Account />
                     // },
+                    {
+                        element: <ProtectedRoutes requiredRole={'admin'} />,
+                        children: [
+                            // admin/stories (admin created), create story
+                            {
+                                path: 'create-story',
+                                element: <CreateStory />
+                            }
+                        ]
+                    }
                 ]
             },
         ]

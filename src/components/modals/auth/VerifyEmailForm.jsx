@@ -4,7 +4,6 @@ import { useVerifyEmail } from '../../../services/auth/VerifyEmailService';
 
 const VerifyEmailForm = () => {
     // do the auth check before showing the sign in modal
-    // make into different component - sign in, sign up, otp
     // when switch to otp form, disable click outside to close modal
 
     const [otp, setOtp] = useState('');
@@ -58,6 +57,7 @@ const VerifyEmailForm = () => {
                         {isPending ? <Spinner color={'#ffffff'} /> : 'Verify'}
                     </button>
                 </div>
+                {isError && <p>Error: {error.message}</p>}
             </form>
             <div className="text-sm text-slate-500 mt-4 text-center">Didn't receive code? <a className="font-medium text-indigo-500 hover:text-indigo-600" href="#0">Resend</a></div>
         </>

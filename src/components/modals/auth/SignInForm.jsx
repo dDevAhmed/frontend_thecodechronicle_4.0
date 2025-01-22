@@ -10,10 +10,8 @@ const SignInForm = () => {
     // when switch to otp form, disable click outside to close modal
 
     const {
-        showAuthModal, setShowAuthModal,
-        showSignInForm, setShowSignInForm,
-        showRegisterEmailForm, setShowRegisterEmailForm,
-        showVerifyEmailForm, setShowVerifyEmailForm,
+        setShowSignInForm,
+        setShowRegisterEmailForm,
         showSignUpForm, setShowSignUpForm,
     } = useContext(AuthContext)
 
@@ -123,6 +121,7 @@ const SignInForm = () => {
                         {isPending ? <Spinner color={'#ffffff'} /> : 'Sign in'}
                     </button>
                 </div>
+                {isError && <p className='text-red-500 text-center'>{error?.message}</p>}
             </form>
 
             {/* continue with social - google */}

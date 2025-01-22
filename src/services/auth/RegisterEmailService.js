@@ -14,10 +14,10 @@ const registerEmail = async ({ email }) => {
             body: JSON.stringify({ email }),
         });
 
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Failed to register email');
-        }
+        // if (!response.ok) {
+        //     const errorData = await response.json();
+        //     throw new Error(errorData.message || 'Failed to register email');
+        // }
 
         const data = await response.json();
         console.log('response from api says', data)

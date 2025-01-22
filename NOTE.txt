@@ -8,6 +8,7 @@ fixme
 4. add cancel button for search bar
 5. onclick outside close medium large search results
 6. clear auth forms states when close auth modal
+7. add view password (eye) to password input
 
 
 

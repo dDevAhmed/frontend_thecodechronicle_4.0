@@ -1,12 +1,12 @@
 import { useMutation } from '@tanstack/react-query';
 import { useContext } from 'react';
+import { toast } from 'react-toastify';
 import AuthContext from '../../contexts/AuthContext';
 
 const api = import.meta.env.VITE_API_URL
 
 const signIn = async ({ email, password }) => {
 
-    console.log('email from service', email)
     try {
         const response = await fetch(`${api}/auth/sign-in`, {
             method: 'POST',
@@ -16,12 +16,12 @@ const signIn = async ({ email, password }) => {
             body: JSON.stringify({ email, password }),
         });
 
+        const data = await response.json();
+
         if (!response.ok) {
-            throw new Error('Failed to sign in');
+            throw new Error(data?.response.error || 'Failed to sign in, try again');
         }
 
-        const data = await response.json();
-        console.log('response from api says', data)
         return data;
     } catch (error) {
         throw new Error(error.message);
@@ -36,10 +36,10 @@ export const useSignIn = () => {
     return useMutation({
         mutationFn: signIn,
         onSuccess: (data) => {
-            console.log('Sign-in successful:', data);
             if (data.access_token) {
                 login(data.access_token);
                 setShowAuthModal(false);
+                toast.success('Sign-in successful!');
             }
         },
         onError: (error) => {
