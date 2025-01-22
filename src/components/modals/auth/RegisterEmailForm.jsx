@@ -21,8 +21,6 @@ const RegisterEmailForm = () => {
             { email },
         );
 
-        console.log(email)
-
     };
 
     const handleSwitchForm = async () => {
@@ -53,13 +51,10 @@ const RegisterEmailForm = () => {
                     <button
                         type="submit"
                         className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                        onClick={'handleGotoVerifyEmail'}      //fixme - remove after
                     >
-                        {isPending ? <Spinner color={'#ffffff'} /> : 'Register'}
+                        {isPending ? <Spinner color={'#ffffff'} size={20} /> : 'Register'}
                     </button>
                 </div>
-                {isError && <p>Error: {error.message}</p>}
-
             </form>
 
             <p className="mt-10 text-center text-sm/6 text-gray-500">

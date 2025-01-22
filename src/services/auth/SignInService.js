@@ -19,9 +19,9 @@ const signIn = async ({ email, password }) => {
         const data = await response.json();
 
         if (!response.ok) {
-            throw new Error(data?.response.error || 'Failed to sign in, try again');
+            throw new Error(data?.response.message || 'Failed to sign in, try again');
         }
-
+        
         return data;
     } catch (error) {
         throw new Error(error.message);
@@ -43,7 +43,7 @@ export const useSignIn = () => {
             }
         },
         onError: (error) => {
-            console.error('Sign-in failed:', error);
+            toast.error(error.message);
         },
     });
 };

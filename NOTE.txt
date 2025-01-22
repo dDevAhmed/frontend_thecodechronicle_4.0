@@ -9,7 +9,17 @@ fixme
 5. onclick outside close medium large search results
 6. clear auth forms states when close auth modal
 7. add view password (eye) to password input
+8. redesign toastify for mobile -> new stories notification
+9. 
+ if (!response.ok) {
+            throw new Error(data?.message || 'Failed to sign in, try again');
+        }
 
+        from backend unify such that => 
+            data?.message is used instead of 
+            data?.response.error otherwise
+
+FIXME NOW============
 
 
 backend

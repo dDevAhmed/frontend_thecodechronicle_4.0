@@ -1,9 +1,16 @@
-
+import CreateStoryForm from '../../components/CreateStoryForm'
+import PageTitle from '../../ui/PageTitle'
 const CreateStory = () => {
 
     // form
     return (
-        <div>CreateStory</div>
+        <>
+            <PageTitle>Create Story</PageTitle>
+            <div className=''>
+                <CreateStoryForm />
+                {/* preview window for desktop */}
+            </div>
+        </>
     )
 }
 

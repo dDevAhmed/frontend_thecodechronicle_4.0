@@ -118,10 +118,9 @@ const SignInForm = () => {
                         type="submit"
                         className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
-                        {isPending ? <Spinner color={'#ffffff'} /> : 'Sign in'}
+                        {isPending ? <Spinner color={'#ffffff'} size={20} /> : 'Sign in'}
                     </button>
                 </div>
-                {isError && <p className='text-red-500 text-center'>{error?.message}</p>}
             </form>
 
             {/* continue with social - google */}

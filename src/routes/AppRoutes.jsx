@@ -29,6 +29,11 @@ const router = createBrowserRouter([
                 index: true,
                 element: <Home />
             },
+            // todo remove after 
+            {
+                path: 'create-story',
+                element: <CreateStory />
+            },
             // {
             //     path: 'story',        //explore -> explore
             //     element: <Story />
@@ -69,10 +74,10 @@ const router = createBrowserRouter([
                         element: <ProtectedRoutes requiredRole={'admin'} />,
                         children: [
                             // admin/stories (admin created), create story
-                            {
-                                path: 'create-story',
-                                element: <CreateStory />
-                            }
+                            // {
+                            //     path: 'create-story',
+                            //     element: <CreateStory />
+                            // }
                         ]
                     }
                 ]

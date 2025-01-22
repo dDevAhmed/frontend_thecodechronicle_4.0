@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AppProvider } from './contexts/AppContext';
 import { StoryProvider } from './contexts/StoryContext';
 import { AuthProvider } from './contexts/AuthContext';
-import Toastify from './ui/Toastify';
+// import Toastify from './ui/Toastify';
 
 function App() {
 
@@ -17,7 +17,7 @@ function App() {
         <AppProvider>
           <StoryProvider>
             <RouterProvider router={router} />
-            <Toastify />     {/* to be accessible globally */}
+            {/* <Toastify />     to be accessible globally */}
           </StoryProvider>
         </AppProvider>
       </AuthProvider>
