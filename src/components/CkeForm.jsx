@@ -24,6 +24,7 @@ const CkeForm = () => {
         <CKEditor
             editor={ClassicEditor}
             config={{
+                licenseKey: import.meta.env.VITE_CKEDITOR_LICENSE_KEY,
                 toolbar: [
                     'undo', 'redo', '|',
                     'heading', '|', 'bold', 'italic', '|',

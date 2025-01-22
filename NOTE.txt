@@ -18,6 +18,7 @@ fixme
         from backend unify such that => 
             data?.message is used instead of 
             data?.response.error otherwise
+10. always return to callback_url (url shown before requesting auth)
 
 FIXME NOW============
 
