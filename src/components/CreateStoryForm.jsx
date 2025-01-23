@@ -38,12 +38,12 @@ const CreateStoryForm = () => {
                         <label htmlFor="first-name" className="block text-sm/6 font-medium text-gray-900">
                             Title
                         </label>
-                        <div className="mt-2">
+                        <div className="mt-2 border border-gray-900/25 rounded-md">
                             <input
                                 id="title"
                                 name="title"
                                 type="text"
-                                className="block w-full rounded-md bg-gray-100 px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                             />
                         </div>
                     </div>
@@ -54,12 +54,12 @@ const CreateStoryForm = () => {
                         <label htmlFor="first-name" className="block text-sm/6 font-medium text-gray-900">
                             Type
                         </label>
-                        <div className="mt-2">
+                        <div className="mt-2 border border-gray-900/25 rounded-md">
                             <input
                                 id="title"
                                 name="title"
                                 type="text"
-                                className="block w-full rounded-md bg-gray-100 px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                             />
                         </div>
                     </div>
@@ -68,12 +68,12 @@ const CreateStoryForm = () => {
                         <label htmlFor="country" className="block text-sm/6 font-medium text-gray-900">
                             Category
                         </label>
-                        <div className="mt-2 grid grid-cols-1">
+                        <div className="mt-2 grid grid-cols-1 border border-gray-900/25 rounded-md">
                             <select
                                 id="country"
                                 name="country"
                                 autoComplete="country-name"
-                                className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-gray-100 py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                             >
                                 <option>Backend</option>
                                 <option>Frontend</option>
@@ -86,7 +86,7 @@ const CreateStoryForm = () => {
                         </div>
                     </div>
 
-                    <div className="mt-6 space-y-6">
+                    <div className="sm:col-span-3">
                         <label htmlFor="country" className="block text-sm/6 font-medium text-gray-900">
                             Set As
                         </label>

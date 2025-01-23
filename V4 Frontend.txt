@@ -1,0 +1,42 @@
+FIXME
+1. change README content
+2. change .env variables
+3. add brand theme - tailwind.config
+4. post page comments gradient background
+
+TODO
+1. finish up MobileNav component
+2. finish up postcard image gallery item. audio, poll, event
+3. refactor post page large screen
+4. video news post should consider youtube link
+5. blog notification dot
+6. weather, subscribe on small screen
+    subscribe appear on modal after delay
+7. feedback appears after delay in modal
+8. 
+9. spinners/ skeleton
+10. error handling
+11. 
+12. remove unused packages
+14. framer animations
+15. remove all todos, fixme, note
+16. spinner size on different screens
+17. consider reducer/redux
+18. hide browser url in mobile - like youtube
+19. explore page -> add filter settings
+
+NOTE
+final cleaning variables, comments
+
+HACK - BACKEND
+tables
+    1. story
+    2. blog
+    3. comment
+    4. reply ???
+    5. user / author / admin
+    6. tags
+    7. category
+    8. 
+
+    

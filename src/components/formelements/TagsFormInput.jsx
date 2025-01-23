@@ -12,6 +12,7 @@ const TagsFormInput = () => {
                 onChange={setSelected}
                 name="tags"
                 placeHolder="enter tag"
+                separators={["Enter", ","]}
             />
             <p className='text-sm mt-2'>{JSON.stringify(selected)}</p>
         </div>
