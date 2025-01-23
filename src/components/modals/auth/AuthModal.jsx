@@ -20,6 +20,7 @@ const AuthModal = () => {
 
     return (
         <>
+        {/* //fixme - move to global stage */}
             <Toastify
                 position="top-center"
                 autoClose={3000}

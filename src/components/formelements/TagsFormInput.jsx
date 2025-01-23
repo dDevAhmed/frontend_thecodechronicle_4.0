@@ -6,7 +6,7 @@ const TagsFormInput = () => {
 
     return (
         <div>
-            <p className='text-sm mb-1'>press enter (&#8617;) or comma (&#44;) to add new tag</p>
+            <p className='text-sm mb-1'>press enter (&#8617;) or comma (&#44;) to add new tag, backspace (&#8592;) to remove</p>
             <TagsInput
                 value={selected}
                 onChange={setSelected}

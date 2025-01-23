@@ -1,12 +1,39 @@
-import { PhotoIcon } from '@heroicons/react/24/solid'
+import { PhotoIcon, MicrophoneIcon, VideoCameraIcon, DocumentTextIcon } from '@heroicons/react/24/solid'
 import { ChevronDownIcon } from '@heroicons/react/16/solid'
 import TinyEditor from './formelements/TinyEditor'
 import Card from '../ui/Card'
 import TagsFormInput from './formelements/TagsFormInput'
+import { useForm } from '@tanstack/react-form'
+import { useCreateStory } from '../services/StoryService';
 
 const CreateStoryForm = () => {
+
+    const { mutate: createStory, isPending, isError, error, isSuccess } = useCreateStory();
+
+    const form = useForm({
+        defaultValues: {
+            title: '',
+            type: 'text',
+            category: 1,
+            setAs: 'feed',
+            tags: [],
+            content: '',
+        },
+        onSubmit: async ({ value }) => {
+            // Do something with form data
+            createStory(
+                value
+            );
+        },
+    })
+
     return (
-        <form>
+        <form
+            onSubmit={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                form.handleSubmit();
+            }}>
 
             <div className="mt-5 flex flex-col gap-5 pb-10">
                 <Card classNames={'bg-white p-5 rounded-2xl'}>
@@ -39,12 +66,19 @@ const CreateStoryForm = () => {
                             Title
                         </label>
                         <div className="mt-2 border border-gray-900/25 rounded-md">
-                            <input
-                                id="title"
-                                name="title"
-                                type="text"
-                                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                            />
+                            <form.Field name="title">
+                                {(field) => (
+                                    <input
+                                        name={field.name}
+                                        value={field.state.value}
+                                        onBlur={field.handleBlur}
+                                        onChange={(e) => field.handleChange(e.target.value)}
+                                        id="title"
+                                        type="text"
+                                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                    />
+                                )}
+                            </form.Field>
                         </div>
                     </div>
                 </Card>
@@ -54,13 +88,17 @@ const CreateStoryForm = () => {
                         <label htmlFor="first-name" className="block text-sm/6 font-medium text-gray-900">
                             Type
                         </label>
-                        <div className="mt-2 border border-gray-900/25 rounded-md">
-                            <input
+                        <div className="mt-2 border border-gray-900/25 rounded-md flex items-center p-5">
+                            <DocumentTextIcon aria-hidden="true" className="mx-auto size-12 text-gray-300" /> {/* //todo - check by default*/}
+                            <PhotoIcon aria-hidden="true" className="mx-auto size-12 text-gray-300" />
+                            <MicrophoneIcon aria-hidden="true" className="mx-auto size-12 text-gray-300" />
+                            <VideoCameraIcon aria-hidden="true" className="mx-auto size-12 text-gray-300" />
+                            {/* <input
                                 id="title"
                                 name="title"
                                 type="text"
                                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                            />
+                            /> */}
                         </div>
                     </div>
 
@@ -124,12 +162,6 @@ const CreateStoryForm = () => {
                             Tags
                         </label>
                         <div className="mt-2 w-full">
-                            {/* <input
-                                id="title"
-                                name="title"
-                                type="text"
-                                className="block w-full rounded-md bg-gray-100 px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                            /> */}
                             <TagsFormInput />
                         </div>
                     </div>

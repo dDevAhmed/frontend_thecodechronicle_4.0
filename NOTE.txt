@@ -24,7 +24,7 @@ fixme
 FIXME NOW============
 
 todo
-1. remove packages - ckeditor, react-tagsinput, 
+1. remove packages - ckeditor, react-tagsinput, formik
 
 
 backend
