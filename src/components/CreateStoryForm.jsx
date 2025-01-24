@@ -16,8 +16,6 @@ const CreateStoryForm = () => {
     const { mutate: createStory, isPending, isError, error, isSuccess } = useCreateStory();
     const { data: categories, isPending: categoriesPending, isError: categoriesError } = useCategories()
 
-    const [selectedType, setSelectedType] = useState('photo'); // Default selected option  
-
     const form = useForm({
         defaultValues: {
             title: '',
@@ -96,7 +94,7 @@ const CreateStoryForm = () => {
                         <label htmlFor="first-name" className="block text-sm/6 font-medium text-gray-900">
                             Type
                         </label>
-                        <div className="mt-2 border border-gray-900/25 rounded-md flex items-center p-5">
+                        <div className="mt-2">
                             <form.Field name="type">
                                 {(field) => (
                                     <StoryTypeSelector field={field} />
