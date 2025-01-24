@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { PhotoIcon, MicrophoneIcon, VideoCameraIcon, DocumentTextIcon } from '@heroicons/react/24/solid'
 import { ChevronDownIcon } from '@heroicons/react/16/solid'
 import TinyEditor from './formelements/TinyEditor'
@@ -5,22 +6,26 @@ import Card from '../ui/Card'
 import TagsFormInput from './formelements/TagsFormInput'
 import { useForm } from '@tanstack/react-form'
 import { useCreateStory } from '../services/StoryService';
+import { useCategories } from '../services/CategoryService'
+import { capitalizeWords } from '../utils/capitalize'
 
 const CreateStoryForm = () => {
 
     const { mutate: createStory, isPending, isError, error, isSuccess } = useCreateStory();
+    const { data: categories, isPending: categoriesPending, isError: categoriesError } = useCategories()
 
     const form = useForm({
         defaultValues: {
             title: '',
             type: 'text',
-            category: 1,
+            category: '',      //string or number doesn't matter cause of stringify at story service
             setAs: 'feed',
             tags: [],
             content: '',
         },
         onSubmit: async ({ value }) => {
             // Do something with form data
+            console.log(value)
             createStory(
                 value
             );
@@ -107,20 +112,31 @@ const CreateStoryForm = () => {
                             Category
                         </label>
                         <div className="mt-2 grid grid-cols-1 border border-gray-900/25 rounded-md">
-                            <select
-                                id="country"
-                                name="country"
-                                autoComplete="country-name"
-                                className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                            >
-                                <option>Backend</option>
-                                <option>Frontend</option>
-                                <option>Mobile</option>
-                            </select>
-                            <ChevronDownIcon
-                                aria-hidden="true"
-                                className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
-                            />
+                            <form.Field name="category">
+                                {(field) => (
+                                    <>
+                                        <select
+                                            name={field.name}
+                                            value={field.state.value}
+                                            onBlur={field.handleBlur}
+                                            onChange={(e) => field.handleChange(e.target.value)}
+                                            id="category"
+                                            className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                        >
+                                            {/* map categories here */}
+                                            {
+                                                categories?.map((category, index) => (
+                                                    <option key={index} value={category.id}>{capitalizeWords(category.name)}</option>
+                                                ))
+                                            }
+                                        </select>
+                                        <ChevronDownIcon
+                                            aria-hidden="true"
+                                            className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
+                                        />
+                                    </>
+                                )}
+                            </form.Field>
                         </div>
                     </div>
 
@@ -162,7 +178,11 @@ const CreateStoryForm = () => {
                             Tags
                         </label>
                         <div className="mt-2 w-full">
-                            <TagsFormInput />
+                            <form.Field name="tags">
+                                {(field) => (
+                                    <TagsFormInput field={field} /> // Pass the field object to TinyEditor
+                                )}
+                            </form.Field>
                         </div>
                     </div>
                 </Card>
@@ -172,7 +192,11 @@ const CreateStoryForm = () => {
                         Content
                     </label>
                     <div className='mt-2'>
-                        <TinyEditor />
+                        <form.Field name="content">
+                            {(field) => (
+                                <TinyEditor field={field} />
+                            )}
+                        </form.Field>
                     </div>
                 </Card>
 

@@ -32,9 +32,6 @@ export const useStories = () => {
 // create story
 const createStory = async (payload) => {
 
-  // get token from authContext
-  console.log('payload', payload )
-
   try {
     const response = await fetch(`${api}/stories/create-story`, {
       method: 'POST',
@@ -67,11 +64,8 @@ export const useCreateStory = () => {
     mutationFn: createStory,
     // mutationFn: (payload) => createStory({ payload, token: authToken }),
     onSuccess: (data) => {
-      // if (data.access_token) {
-        // login(data.access_token);
-        // setShowAuthModal(false);
-        toast.success('Story created successful!');
-      // }
+      console.log(data)
+      toast.success('Story created successful!');
     },
     onError: (error) => {
       toast.error(error.message);

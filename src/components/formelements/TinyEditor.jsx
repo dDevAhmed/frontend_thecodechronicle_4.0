@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 // import { useForm } from '@tanstack/react-form'
 
-const TinyEditor = () => {
-    const [value, setValue] = useState('');
-    const [text, setText] = useState('');
+const TinyEditor = ({ field }) => {
+    // const [value, setValue] = useState('');
+    // const [text, setText] = useState('');
 
     return (
 
@@ -28,23 +29,20 @@ const TinyEditor = () => {
                     ],
                     ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
                 }}
-                value={value}
-                onEditorChange={(newValue, editor) => {
-                    setValue(newValue);     //with the html formatting
-                    setText(editor.getContent({ format: 'text' }));
-                }}
+                // value={value}
+                // onEditorChange={(newValue, editor) => {
+                //     setValue(newValue);     //with the html formatting
+                //     setText(editor.getContent({ format: 'text' }));
+                // }}
 
-            // for tanstack form
-            // name={field.name}
-            // value={field.state.value}
-            // onBlur={field.handleBlur}
-            // onChange={(e) => field.handleChange(e.target.value)}
-            // initialValue={field.state.value}
-            // onEditorChange={(newContent) => field.handleChange(newContent)}
+                // for tanstack form
+                value={field.state.value} // Connect the editor's value to the form field state
+                onEditorChange={(newValue) => field.handleChange(newValue)} // Update the form field on content change
+                onBlur={field.handleBlur} // Trigger validation on blur
             />
             {/* //todo - remove after */}
-            <pre>{value}</pre>
-            <pre>{text}</pre>
+            <pre>{field.state.value}</pre>
+            {/* <pre>{text}</pre> */}
         </>
 
     );

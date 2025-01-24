@@ -1,7 +1,13 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 
-const TanstackFormField = () => {
+const TanstackFormField = ({ children, form, name }) => {
   return (
-    <div>TanstackFormField</div>
+    <form.Field name={name}>
+      {(field) => (
+        { children }
+      )}
+    </form.Field>
   )
 }
 
