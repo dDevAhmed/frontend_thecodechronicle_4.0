@@ -8,7 +8,6 @@ import { useForm } from '@tanstack/react-form'
 import { useCreateStory } from '../services/StoryService';
 import { useCategories } from '../services/CategoryService'
 import { capitalizeWords } from '../utils/capitalize'
-// import StoryTypeSelector from './formelements/StoryTypeSelector'
 import { useState } from 'react'
 import StoryTypeSelector from './formelements/StoryTypeSelector'
 
@@ -30,11 +29,9 @@ const CreateStoryForm = () => {
         },
         onSubmit: async ({ value }) => {
             // Do something with form data
-            console.log('type of category', value.category);
-            console.log('before sending a request', value);
-            createStory(value);
-            console.log('after sending a request', value);
-
+            createStory(
+                value
+            );
         },
     })
 
@@ -124,7 +121,6 @@ const CreateStoryForm = () => {
                                             id="category"
                                             className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                                         >
-                                            {/* map categories here */}
                                             {
                                                 categories?.map((category, index) => (
                                                     <option key={index} value={category.id}>{capitalizeWords(category.name)}</option>
