@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { PhotoIcon, MicrophoneIcon, VideoCameraIcon, DocumentTextIcon } from '@heroicons/react/24/solid'
+import { PhotoIcon } from '@heroicons/react/24/solid'
 import { ChevronDownIcon } from '@heroicons/react/16/solid'
 import TinyEditor from './formelements/TinyEditor'
 import Card from '../ui/Card'
@@ -8,27 +8,33 @@ import { useForm } from '@tanstack/react-form'
 import { useCreateStory } from '../services/StoryService';
 import { useCategories } from '../services/CategoryService'
 import { capitalizeWords } from '../utils/capitalize'
+// import StoryTypeSelector from './formelements/StoryTypeSelector'
+import { useState } from 'react'
+import StoryTypeSelector from './formelements/StoryTypeSelector'
 
 const CreateStoryForm = () => {
 
     const { mutate: createStory, isPending, isError, error, isSuccess } = useCreateStory();
     const { data: categories, isPending: categoriesPending, isError: categoriesError } = useCategories()
 
+    const [selectedType, setSelectedType] = useState('photo'); // Default selected option  
+
     const form = useForm({
         defaultValues: {
             title: '',
-            type: 'text',
-            category: '',      //string or number doesn't matter cause of stringify at story service
+            type: '',
+            category: '',
             setAs: 'feed',
             tags: [],
             content: '',
         },
         onSubmit: async ({ value }) => {
             // Do something with form data
-            console.log(value)
-            createStory(
-                value
-            );
+            console.log('type of category', value.category);
+            console.log('before sending a request', value);
+            createStory(value);
+            console.log('after sending a request', value);
+
         },
     })
 
@@ -94,16 +100,11 @@ const CreateStoryForm = () => {
                             Type
                         </label>
                         <div className="mt-2 border border-gray-900/25 rounded-md flex items-center p-5">
-                            <DocumentTextIcon aria-hidden="true" className="mx-auto size-12 text-gray-300" /> {/* //todo - check by default*/}
-                            <PhotoIcon aria-hidden="true" className="mx-auto size-12 text-gray-300" />
-                            <MicrophoneIcon aria-hidden="true" className="mx-auto size-12 text-gray-300" />
-                            <VideoCameraIcon aria-hidden="true" className="mx-auto size-12 text-gray-300" />
-                            {/* <input
-                                id="title"
-                                name="title"
-                                type="text"
-                                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                            /> */}
+                            <form.Field name="type">
+                                {(field) => (
+                                    <StoryTypeSelector field={field} />
+                                )}
+                            </form.Field>
                         </div>
                     </div>
 
@@ -141,6 +142,7 @@ const CreateStoryForm = () => {
                     </div>
 
                     <div className="sm:col-span-3">
+                        {/* //todo - work on this */}
                         <label htmlFor="country" className="block text-sm/6 font-medium text-gray-900">
                             Set As
                         </label>
@@ -177,10 +179,10 @@ const CreateStoryForm = () => {
                         <label htmlFor="first-name" className="block text-sm/6 font-medium text-gray-900">
                             Tags
                         </label>
-                        <div className="mt-2 w-full">
+                        <div className="mt-2">
                             <form.Field name="tags">
                                 {(field) => (
-                                    <TagsFormInput field={field} /> // Pass the field object to TinyEditor
+                                    <TagsFormInput field={field} />
                                 )}
                             </form.Field>
                         </div>
@@ -200,6 +202,7 @@ const CreateStoryForm = () => {
                     </div>
                 </Card>
 
+                {/* //todo - add preview button for small, medium screens/} */}
                 <div className="flex items-center justify-end gap-x-6">
                     <button type="button" className="text-sm/6 font-semibold text-gray-900">
                         Cancel

@@ -56,15 +56,12 @@ const createStory = async (payload) => {
 
 export const useCreateStory = () => {
 
-  // const { login } = useContext(AuthContext);
-  // const { setShowAuthModal } = useContext(AuthContext);
   const { authToken } = useContext(AuthContext);
 
   return useMutation({
     mutationFn: createStory,
     // mutationFn: (payload) => createStory({ payload, token: authToken }),
     onSuccess: (data) => {
-      console.log(data)
       toast.success('Story created successful!');
     },
     onError: (error) => {

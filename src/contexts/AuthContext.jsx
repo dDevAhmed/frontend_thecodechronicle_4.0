@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
     const [showVerifyEmailForm, setShowVerifyEmailForm] = useState(false)
     const [showSignUpForm, setShowSignUpForm] = useState(false)
 
-    const [authToken, setAuthToken] = useState(localStorage.getItem('access_token') || '');
+    const [authToken, setAuthToken] = useState();
     const [authUser, setAuthUser] = useState(null);
 
     useEffect(() => {
@@ -26,15 +26,23 @@ export const AuthProvider = ({ children }) => {
     }, [authToken]);
 
     const login = (token) => {
-        setAuthToken(token);
-        localStorage.setItem('access_token', token);
-        const decodedToken = jwtDecode(token);
-        setAuthUser(decodedToken);
+        try {
+            if (token) {
+                setAuthToken(token);
+
+                const decodedToken = jwtDecode(token);
+                setAuthUser(decodedToken);
+            }
+        } catch (error) {
+            setAuthToken(null);
+            throw new Error("Error finding user", error);
+            
+        }
+        // localStorage.setItem('access_token', token);        //fixme - remove all storage to local storage
     };
 
     const logout = () => {
         setAuthToken('');
-        localStorage.removeItem('access_token');
         setAuthUser(null);
     };
 
