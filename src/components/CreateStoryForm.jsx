@@ -18,7 +18,7 @@ const CreateStoryForm = () => {
         defaultValues: {
             title: '',
             type: 'text',
-            category: '',      //string or number doesn't matter cause of stringify at story service
+            category: 1,      //string or number doesn't matter cause of stringify at story service
             setAs: 'feed',
             tags: [],
             content: '',
@@ -107,7 +107,7 @@ const CreateStoryForm = () => {
                         </div>
                     </div>
 
-                    <div className="sm:col-span-3">
+                    {/* <div className="sm:col-span-3">
                         <label htmlFor="country" className="block text-sm/6 font-medium text-gray-900">
                             Category
                         </label>
@@ -123,7 +123,6 @@ const CreateStoryForm = () => {
                                             id="category"
                                             className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                                         >
-                                            {/* map categories here */}
                                             {
                                                 categories?.map((category, index) => (
                                                     <option key={index} value={category.id}>{capitalizeWords(category.name)}</option>
@@ -138,7 +137,7 @@ const CreateStoryForm = () => {
                                 )}
                             </form.Field>
                         </div>
-                    </div>
+                    </div> */}
 
                     <div className="sm:col-span-3">
                         <label htmlFor="country" className="block text-sm/6 font-medium text-gray-900">
