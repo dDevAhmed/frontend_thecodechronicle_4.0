@@ -8,6 +8,8 @@ import { useForm } from '@tanstack/react-form'
 import { useCreateStory } from '../services/StoryService';
 import { useCategories } from '../services/CategoryService'
 import { capitalizeWords } from '../utils/capitalize'
+import { useState } from 'react'
+import StoryTypeSelector from './formelements/StoryTypeSelector'
 
 const CreateStoryForm = () => {
 
@@ -18,14 +20,13 @@ const CreateStoryForm = () => {
         defaultValues: {
             title: '',
             type: 'text',
-            category: 1,      //string or number doesn't matter cause of stringify at story service
+            category: '',      //string or number doesn't matter cause of stringify at story service
             setAs: 'feed',
             tags: [],
             content: '',
         },
         onSubmit: async ({ value }) => {
             // Do something with form data
-            console.log(value)
             createStory(
                 value
             );
@@ -94,20 +95,15 @@ const CreateStoryForm = () => {
                             Type
                         </label>
                         <div className="mt-2 border border-gray-900/25 rounded-md flex items-center p-5">
-                            <DocumentTextIcon aria-hidden="true" className="mx-auto size-12 text-gray-300" /> {/* //todo - check by default*/}
-                            <PhotoIcon aria-hidden="true" className="mx-auto size-12 text-gray-300" />
-                            <MicrophoneIcon aria-hidden="true" className="mx-auto size-12 text-gray-300" />
-                            <VideoCameraIcon aria-hidden="true" className="mx-auto size-12 text-gray-300" />
-                            {/* <input
-                                id="title"
-                                name="title"
-                                type="text"
-                                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                            /> */}
+                            <form.Field name="type">
+                                {(field) => (
+                                    <StoryTypeSelector field={field} />
+                                )}
+                            </form.Field>
                         </div>
                     </div>
 
-                    {/* <div className="sm:col-span-3">
+                    <div className="sm:col-span-3">
                         <label htmlFor="country" className="block text-sm/6 font-medium text-gray-900">
                             Category
                         </label>
@@ -137,7 +133,7 @@ const CreateStoryForm = () => {
                                 )}
                             </form.Field>
                         </div>
-                    </div> */}
+                    </div>
 
                     <div className="sm:col-span-3">
                         <label htmlFor="country" className="block text-sm/6 font-medium text-gray-900">
