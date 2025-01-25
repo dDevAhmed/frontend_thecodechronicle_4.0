@@ -1,12 +1,15 @@
-import React, { useContext } from 'react'
+/* eslint-disable react/prop-types */
+import { useContext } from 'react'
 import { capitalizeWords } from '../../utils/capitalize'
 import Button from '../../ui/Button';
 import StoryContext from '../../contexts/StoryContext';
 import StoryCardActions from './card/StoryCardActions'
+import DOMPurify from 'dompurify';
 
 const StoryBody = ({ post }) => {
 
   const { setShowStoryCommentsModal } = useContext(StoryContext)
+  const sanitizedMessage = DOMPurify.sanitize(post?.message);
 
   return (
 
@@ -17,10 +20,7 @@ const StoryBody = ({ post }) => {
         </div>
 
         {/* dangerouslySetInnerHTML is used to render html tags in react */}
-        <p dangerouslySetInnerHTML={{ __html: post?.message }}></p>
-        {/* <p>
-          {post.message}
-        </p> */}
+        <p dangerouslySetInnerHTML={{ __html: sanitizedMessage }}></p>
 
         <div className='flex justify-center md:justify-between items-center mt-5'>
           <Button
