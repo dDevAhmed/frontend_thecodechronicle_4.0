@@ -29,6 +29,55 @@ export const useStories = () => {
   });
 };
 
+const fetchHeadlines = async (page = 1) => {
+
+  try {
+    const response = await fetch(`${api}/stories/headlines?page=${page}`);
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch headlines');
+    }
+
+    const data = await response.json();
+    return data;
+
+  } catch (error) {
+    throw new Error(error, "Failed to fetch headlines");
+  }
+}
+
+export const useHeadlines = () => {
+  return useQuery({
+    queryKey: ['headlines'],
+    queryFn: fetchHeadlines,
+  });
+};
+
+// fetch a single story
+const fetchStory = async (id) => {
+
+  try {
+    const response = await fetch(`${api}/stories/${id}`);
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch story');
+    }
+
+    const data = await response.json();
+    return data;
+
+  } catch (error) {
+    throw new Error(error, "Failed to fetch story");
+  }
+}
+
+export const useStory = (id) => {
+  return useQuery({
+    queryKey: ['Story', id],
+    queryFn: () => fetchStory(id),
+  });
+};
+
 // create story
 const createStory = async (payload) => {
 

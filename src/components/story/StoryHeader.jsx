@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { capitalizeWords } from '../../utils/capitalize'
@@ -9,6 +10,7 @@ import Button from '../../ui/Button';
 import Pill from '../../ui/Pill';
 
 const StoryHeader = ({ post }) => {
+
   const navigate = useNavigate();
 
   const handleGoBack = () => {
@@ -23,7 +25,8 @@ const StoryHeader = ({ post }) => {
 
   return (
     // fixme - use default image if no primaryMedia/coverImage
-    <div className="h-full w-full bg-cover bg-no-repeat bg-center bg-fixed p-5 pb-14 lg:pb-5 relative flex flex-col md:rounded-t-2xl" style={{ backgroundImage: `url(${post?.primaryMedia.url ? post?.primaryMedia.url : PostImage})` }}>
+    // <div className="h-full w-full bg-cover bg-no-repeat bg-center bg-fixed p-5 pb-14 lg:pb-5 relative flex flex-col md:rounded-t-2xl" style={{ backgroundImage: `url(${post?.primaryMedia.url ? post?.primaryMedia.url : PostImage})` }}>
+    <div className="h-full w-full bg-cover bg-no-repeat bg-center bg-fixed p-5 pb-14 lg:pb-5 relative flex flex-col md:rounded-t-2xl" style={{ backgroundImage: `url(${PostImage})` }}>
       <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gray-700 to-transparent"></div>
 
       <div className="flex items-center justify-between">

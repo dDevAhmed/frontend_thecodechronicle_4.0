@@ -9,7 +9,7 @@ import Explore from "../pages/Explore";
 import Saved from "../pages/Saved"
 import ProtectedRoutes from "./ProtectedRoutes"
 import CreateStory from "../pages/admin/CreateStory"
-// import Story from '../pages/Story'
+import Story from '../pages/Story'
 
 const router = createBrowserRouter([
     // /post/new -> add new post (protected, admin layout)
@@ -38,11 +38,10 @@ const router = createBrowserRouter([
             //     path: 'story',        //explore -> explore
             //     element: <Story />
             // },
-            // {
-            //     path: 'story/:id',       //news/{slugified-title}
-            //     path: 'news/:id',       //news/{slugified-title}
-            //     element: <Story />
-            // },
+            {
+                path: 'story/:id/:slug',       //news/{slugified-title}
+                element: <Story />
+            },
             {
                 path: 'explore',
                 element: <Explore />

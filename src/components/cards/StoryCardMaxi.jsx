@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
-// import { PiShareFatLight, PiBookmarkSimpleLight, PiThumbsUp } from "react-icons/pi";
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { capitalizeWords } from '../../utils/capitalize'
 import { getTimeAgo } from '../../utils/time';
 import Card from '../../ui/Card'
@@ -10,6 +9,7 @@ import StoryCardVideoView from '../story/card/StoryCardVideoView';
 import StoryCardImageGalleryView from '../story/card/StoryCardImageGalleryView';
 import StoryCardActions from '../story/card/StoryCardActions';
 import DOMPurify from 'dompurify';
+import slugify from 'slugify';
 
 const StoryCardMaxi = ({ post }) => {
 
@@ -17,6 +17,7 @@ const StoryCardMaxi = ({ post }) => {
 
   const timeAgo = getTimeAgo(post.createdAt);
   const sanitizedMessage = DOMPurify.sanitize(post?.message);
+  const slug = slugify(post.title, { lower: true });
 
   return (
     <Card classNames={'bg-white p-5 rounded-2xl flex flex-col justify-between gap-5'}>
@@ -28,11 +29,13 @@ const StoryCardMaxi = ({ post }) => {
       </span >
 
       <div className=''>
-        <Link to={`/news/${post.id}`}
-          className='font-semibold text-xl w-fit group-hover:underline'>{capitalizeWords(post.title)}</Link>
+        <Link
+          to={`/story/${post.id}/${slug}`}
+          className='font-semibold text-xl w-fit group-hover:underline'>
+          {capitalizeWords(post.title)}
+        </Link>
 
         <p className="line-clamp-2 text-gray-700 mt-2">
-          {/* {post.message} */}
           {/* dangerouslySetInnerHTML is used to render html tags in react */}
           <p dangerouslySetInnerHTML={{ __html: sanitizedMessage }}></p>
 
@@ -40,7 +43,7 @@ const StoryCardMaxi = ({ post }) => {
         {
           post.message && (
             <Link
-              to={`/news/${post.id}`}
+              to={`/story/${post.id}/${slug}`}
               className="text-blue-600 underline"
             >
               Read More

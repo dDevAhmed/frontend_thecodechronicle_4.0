@@ -9,15 +9,13 @@ const LazyStoryCardMaxi = lazy(() => import('../cards/StoryCardMaxi'));
 
 const StoriesList = () => {
 
-    // filter data to fetch only feed, do in useStoriesHook
     const { data, isPending, isError } = useStories()
-    console.log(data)
 
     return (
 
         <InfiniteScroll
             dataLength={data?.items.length || 0}
-            // next={() => fetchMoreStories('feed')}
+            // next={() => fetchMoreStories('feed')}        //fixme - implement
             hasMore={true}
             loader={<div className='p-10'><Spinner /></div>}
             endMessage={
