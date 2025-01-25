@@ -22,12 +22,13 @@ const CreateStoryForm = () => {
             title: '',
             type: '',
             category: '',
-            setAs: 'feed',
+            setAs: '',
             tags: [],
-            content: '',
+            message: '',
         },
         onSubmit: async ({ value }) => {
             // Do something with form data
+            console.log(value)
             createStory(
                 value
             );
@@ -43,7 +44,7 @@ const CreateStoryForm = () => {
             }}>
 
             <div className="mt-5 flex flex-col gap-5 pb-20">
-                <Card classNames={'bg-white p-5 rounded-2xl flex flex-col gap-5'}>
+                <Card classNames={'bg-white p-5 rounded-2xl'}>
                     <div className="sm:col-span-3">
                         <label htmlFor="type" className="block text-sm/6 font-medium text-gray-900">
                             Type
@@ -104,7 +105,8 @@ const CreateStoryForm = () => {
                                 </div>
                             </div>
                         </div>
-                        {/* secondary media */}
+
+                        {/* //todo - work on secondary media */}
                         <div>
                             <label htmlFor="secondary-photos" className="block text-sm/6 font-medium text-gray-900">
                                 Secondary Photos
@@ -129,7 +131,7 @@ const CreateStoryForm = () => {
                     </div>
                 </Card>
 
-                <Card classNames={'bg-white p-5 rounded-2xl flex flex-col gap-5'}>
+                <Card classNames={'bg-white p-5 rounded-2xl'}>
                     <div className="sm:col-span-3">
                         <label htmlFor="country" className="block text-sm/6 font-medium text-gray-900">
                             Category
@@ -146,6 +148,7 @@ const CreateStoryForm = () => {
                                             id="category"
                                             className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                                         >
+                                            <option value=''>(choose a category)</option>
                                             {
                                                 categories?.map((category, index) => (
                                                     <option key={index} value={category.id}>{capitalizeWords(category.name)}</option>
@@ -164,11 +167,11 @@ const CreateStoryForm = () => {
                 </Card>
 
                 <Card classNames={'bg-white p-5 rounded-2xl'}>
-                    <label htmlFor="content" className="block text-sm/6 font-medium text-gray-900">
-                        Content
+                    <label htmlFor="message" className="block text-sm/6 font-medium text-gray-900">
+                        Message
                     </label>
                     <div className='mt-2'>
-                        <form.Field name="content">
+                        <form.Field name="message">
                             {(field) => (
                                 <TinyEditor field={field} />
                             )}
@@ -191,13 +194,13 @@ const CreateStoryForm = () => {
                     </div>
                 </Card>
 
-                <Card classNames={'bg-white p-5 rounded-2xl flex flex-col gap-5'}>
+                <Card classNames={'bg-white p-5 rounded-2xl'}>
                     <div className="sm:col-span-3">
                         <label htmlFor="country" className="block text-sm/6 font-medium text-gray-900">
                             Set As
                         </label>
                         <div className="mt-2">
-                            <form.Field name="setAS">
+                            <form.Field name="setAs">
                                 {(field) => (
                                     <FeedHeadlineSelector field={field} />
                                 )}
