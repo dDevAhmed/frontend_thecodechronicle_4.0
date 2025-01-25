@@ -8,8 +8,9 @@ import { useForm } from '@tanstack/react-form'
 import { useCreateStory } from '../services/StoryService';
 import { useCategories } from '../services/CategoryService'
 import { capitalizeWords } from '../utils/capitalize'
-import { useState } from 'react'
 import StoryTypeSelector from './formelements/StoryTypeSelector'
+import Button from '../ui/Button'
+import FeedHeadlineSelector from './formelements/FeedHeadlineSelector'
 
 const CreateStoryForm = () => {
 
@@ -41,34 +42,25 @@ const CreateStoryForm = () => {
                 form.handleSubmit();
             }}>
 
-            <div className="mt-5 flex flex-col gap-5 pb-10">
-                <Card classNames={'bg-white p-5 rounded-2xl'}>
-                    <div className="col-span-full">
-                        <label htmlFor="cover-photo" className="block text-sm/6 font-medium text-gray-900">
-                            Cover photo
+            <div className="mt-5 flex flex-col gap-5 pb-20">
+                <Card classNames={'bg-white p-5 rounded-2xl flex flex-col gap-5'}>
+                    <div className="sm:col-span-3">
+                        <label htmlFor="type" className="block text-sm/6 font-medium text-gray-900">
+                            Type
                         </label>
-                        <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                            <div className="text-center">
-                                <PhotoIcon aria-hidden="true" className="mx-auto size-12 text-gray-300" />
-                                <div className="mt-4 flex text-sm/6 text-gray-600">
-                                    <label
-                                        htmlFor="file-upload"
-                                        className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 focus-within:outline-hidden hover:text-indigo-500"
-                                    >
-                                        <span>Upload a file</span>
-                                        <input id="file-upload" name="file-upload" type="file" className="sr-only" />
-                                    </label>
-                                    <p className="pl-1">or drag and drop</p>
-                                </div>
-                                <p className="text-xs/5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
-                            </div>
+                        <div className="mt-2">
+                            <form.Field name="type">
+                                {(field) => (
+                                    <StoryTypeSelector field={field} />
+                                )}
+                            </form.Field>
                         </div>
                     </div>
                 </Card>
 
                 <Card classNames={'bg-white p-5 rounded-2xl'}>
                     <div className="sm:col-span-3">
-                        <label htmlFor="first-name" className="block text-sm/6 font-medium text-gray-900">
+                        <label htmlFor="title" className="block text-sm/6 font-medium text-gray-900">
                             Title
                         </label>
                         <div className="mt-2 border border-gray-900/25 rounded-md">
@@ -89,20 +81,55 @@ const CreateStoryForm = () => {
                     </div>
                 </Card>
 
-                <Card classNames={'bg-white p-5 rounded-2xl flex flex-col gap-5'}>
-                    <div className="sm:col-span-3">
-                        <label htmlFor="first-name" className="block text-sm/6 font-medium text-gray-900">
-                            Type
-                        </label>
-                        <div className="mt-2">
-                            <form.Field name="type">
-                                {(field) => (
-                                    <StoryTypeSelector field={field} />
-                                )}
-                            </form.Field>
+                <Card classNames={'bg-white p-5 rounded-2xl'}>
+                    <div className="col-span-full flex flex-col gap-5">
+                        <div>
+                            <label htmlFor="cover-photo" className="block text-sm/6 font-medium text-gray-900">
+                                Cover photo
+                            </label>
+                            <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                                <div className="text-center">
+                                    <PhotoIcon aria-hidden="true" className="mx-auto size-12 text-gray-300" />
+                                    <div className="mt-4 flex text-sm/6 text-gray-600">
+                                        <label
+                                            htmlFor="file-upload"
+                                            className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 focus-within:outline-hidden hover:text-indigo-500"
+                                        >
+                                            <span>Upload a file</span>
+                                            <input id="file-upload" name="file-upload" type="file" className="sr-only" />
+                                        </label>
+                                        <p className="pl-1">or drag and drop</p>
+                                    </div>
+                                    <p className="text-xs/5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
+                                </div>
+                            </div>
+                        </div>
+                        {/* secondary media */}
+                        <div>
+                            <label htmlFor="secondary-photos" className="block text-sm/6 font-medium text-gray-900">
+                                Secondary Photos
+                            </label>
+                            <div className='flex items-center gap-5 mt-2'>
+                                <div
+                                    className='group cursor-pointer border border-gray-900/25 rounded-md p-5 flex-1 hover:border-brand-primary-blue'
+                                >
+                                    <PhotoIcon
+                                        aria-hidden="true"
+                                        className='mx-auto size-12 group-hover:text-brand-primary-blue text-gray-300'
+                                    />
+                                </div>
+                                <div className='rounded-lg relative min-h-20 w-full bg-cover bg-no-repeat bg-center'>
+                                    <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center rounded-lg cursor-pointer">
+                                        {/* //todo - onclick trigger file upload, use plus icon */}
+                                        <span className="text-white text-2xl">+</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </Card>
 
+                <Card classNames={'bg-white p-5 rounded-2xl flex flex-col gap-5'}>
                     <div className="sm:col-span-3">
                         <label htmlFor="country" className="block text-sm/6 font-medium text-gray-900">
                             Category
@@ -134,43 +161,24 @@ const CreateStoryForm = () => {
                             </form.Field>
                         </div>
                     </div>
+                </Card>
 
-                    <div className="sm:col-span-3">
-                        {/* //todo - work on this */}
-                        <label htmlFor="country" className="block text-sm/6 font-medium text-gray-900">
-                            Set As
-                        </label>
-                        <div className='flex gap-5'>
-                            <div className="flex items-center gap-x-3">
-                                <input
-                                    defaultChecked
-                                    id="push-everything"
-                                    name="push-notifications"
-                                    type="radio"
-                                    className="relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden"
-                                />
-                                <label htmlFor="push-everything" className="block text-sm/6 font-medium text-gray-900">
-                                    feed
-                                </label>
-                            </div>
-                            <div className="flex items-center gap-x-3">
-                                <input
-                                    id="push-email"
-                                    name="push-notifications"
-                                    type="radio"
-                                    className="relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white not-checked:before:hidden checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden"
-                                />
-                                <label htmlFor="push-email" className="block text-sm/6 font-medium text-gray-900">
-                                    headline
-                                </label>
-                            </div>
-                        </div>
+                <Card classNames={'bg-white p-5 rounded-2xl'}>
+                    <label htmlFor="content" className="block text-sm/6 font-medium text-gray-900">
+                        Content
+                    </label>
+                    <div className='mt-2'>
+                        <form.Field name="content">
+                            {(field) => (
+                                <TinyEditor field={field} />
+                            )}
+                        </form.Field>
                     </div>
                 </Card>
 
                 <Card classNames={'bg-white p-5 rounded-2xl'}>
                     <div className="sm:col-span-3">
-                        <label htmlFor="first-name" className="block text-sm/6 font-medium text-gray-900">
+                        <label htmlFor="tags" className="block text-sm/6 font-medium text-gray-900">
                             Tags
                         </label>
                         <div className="mt-2">
@@ -183,16 +191,18 @@ const CreateStoryForm = () => {
                     </div>
                 </Card>
 
-                <Card classNames={'bg-white p-5 rounded-2xl'}>
-                    <label htmlFor="country" className="block text-sm/6 font-medium text-gray-900">
-                        Content
-                    </label>
-                    <div className='mt-2'>
-                        <form.Field name="content">
-                            {(field) => (
-                                <TinyEditor field={field} />
-                            )}
-                        </form.Field>
+                <Card classNames={'bg-white p-5 rounded-2xl flex flex-col gap-5'}>
+                    <div className="sm:col-span-3">
+                        <label htmlFor="country" className="block text-sm/6 font-medium text-gray-900">
+                            Set As
+                        </label>
+                        <div className="mt-2">
+                            <form.Field name="setAS">
+                                {(field) => (
+                                    <FeedHeadlineSelector field={field} />
+                                )}
+                            </form.Field>
+                        </div>
                     </div>
                 </Card>
 
@@ -208,6 +218,13 @@ const CreateStoryForm = () => {
                         Save
                     </button>
                 </div>
+
+                <Button
+                    type="submit"
+                    classNames={"rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"}
+                >
+                    Preview
+                </Button>
             </div>
 
         </form>

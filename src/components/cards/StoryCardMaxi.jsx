@@ -45,6 +45,10 @@ const StoryCardMaxi = ({ post }) => {
       </div>
 
       {/* handle different media types */}
+      {/* if post is image
+          cover image = primary media
+          if no secondary media ? single image : gallery view */}
+
       {
         post.type === 'audio'
           ? <StoryCardAudioView post={post} />
