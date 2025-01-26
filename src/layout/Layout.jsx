@@ -16,7 +16,7 @@ export default function Layout() {
     const location = useLocation()
 
     const isNewsOrBlogPage = (pathname) => {
-        return pathname.startsWith('/news')
+        return pathname.startsWith('/story')
         // || pathname.startsWith('/blog');
     };
 

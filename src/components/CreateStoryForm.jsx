@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import { useState } from 'react'
 import { PhotoIcon } from '@heroicons/react/24/solid'
 import { ChevronDownIcon } from '@heroicons/react/16/solid'
 import TinyEditor from './formelements/TinyEditor'
@@ -34,6 +35,14 @@ const CreateStoryForm = () => {
             );
         },
     })
+
+    // todo - for primary media / cover photo , move to new component
+    const [file, setFile] = useState();
+    function handleUploadFile(e) {
+        console.log(e.target.files);
+        setFile(URL.createObjectURL(e.target.files[0]));
+    }
+
 
     return (
         <form
@@ -85,10 +94,12 @@ const CreateStoryForm = () => {
                 <Card classNames={'bg-white p-5 rounded-2xl'}>
                     <div className="col-span-full flex flex-col gap-5">
                         <div>
+                            {/* //todo - make component */}
                             <label htmlFor="cover-photo" className="block text-sm/6 font-medium text-gray-900">
+                                {/* //todo - change to primary photo (including the form.field name) if image type selected */}
                                 Cover photo
                             </label>
-                            <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                            <div className='mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 bg-cover bg-center' style={{ backgroundImage: `url(${file && file})` }}>
                                 <div className="text-center">
                                     <PhotoIcon aria-hidden="true" className="mx-auto size-12 text-gray-300" />
                                     <div className="mt-4 flex text-sm/6 text-gray-600">
@@ -97,7 +108,7 @@ const CreateStoryForm = () => {
                                             className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 focus-within:outline-hidden hover:text-indigo-500"
                                         >
                                             <span>Upload a file</span>
-                                            <input id="file-upload" name="file-upload" type="file" className="sr-only" />
+                                            <input id="file-upload" name="file-upload" type="file" className="sr-only" onChange={handleUploadFile} />
                                         </label>
                                         <p className="pl-1">or drag and drop</p>
                                     </div>
