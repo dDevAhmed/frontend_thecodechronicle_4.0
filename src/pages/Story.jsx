@@ -9,9 +9,9 @@ const Story = () => {
     // fixme - not a good approach - land at the top by default
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    const { id } = useParams()
+    const { slugTitle } = useParams()
 
-    const { data: post, isPending, isError } = useStory(id)
+    const { data: post, isPending, isError } = useStory(slugTitle)
 
     console.log('story page says ', post)
     

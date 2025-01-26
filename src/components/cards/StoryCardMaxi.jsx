@@ -30,7 +30,7 @@ const StoryCardMaxi = ({ post }) => {
 
       <div className=''>
         <Link
-          to={`/story/${post.id}/${slug}`}
+          to={`/story/${post.slugTitle}`}
           className='font-semibold text-xl w-fit group-hover:underline'>
           {capitalizeWords(post.title)}
         </Link>
@@ -43,7 +43,7 @@ const StoryCardMaxi = ({ post }) => {
         {
           post.message && (
             <Link
-              to={`/story/${post.id}/${slug}`}
+              to={`/story/${post.slugTitle}`}
               className="text-blue-600 underline"
             >
               Read More

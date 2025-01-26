@@ -29,19 +29,6 @@ const router = createBrowserRouter([
                 index: true,
                 element: <Home />
             },
-            // todo remove after 
-            {
-                path: 'create-story',
-                element: <CreateStory />
-            },
-            // {
-            //     path: 'story',        //explore -> explore
-            //     element: <Story />
-            // },
-            {
-                path: 'story/:id/:slug',       //news/{slugified-title}
-                element: <Story />
-            },
             {
                 path: 'explore',
                 element: <Explore />
@@ -50,6 +37,10 @@ const router = createBrowserRouter([
             //     path: 'blogs',
             //     element: <Blogs />
             // },
+            {
+                path: 'story/:slugTitle',
+                element: <Story />
+            },
             // {
             //     path: 'category/:category',
             //     element: <Category />
@@ -58,6 +49,11 @@ const router = createBrowserRouter([
             //     path: 'tag/:tag',
             //     element: <Tag />
             // },
+            // todo remove after 
+            {
+                path: 'stories/create',
+                element: <CreateStory />
+            },
             {
                 element: <PrivateRoutes />,
                 children: [
@@ -74,7 +70,7 @@ const router = createBrowserRouter([
                         children: [
                             // admin/stories (admin created), create story
                             // {
-                            //     path: 'create-story',
+                            //     path: 'create',
                             //     element: <CreateStory />
                             // }
                         ]

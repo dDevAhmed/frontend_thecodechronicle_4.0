@@ -10,7 +10,7 @@ import slugify from 'slugify';
 const HeadlineItem = ({ headline }) => {
 
   const timeAgo = getTimeAgo(headline.createdAt);
-  const slug = slugify(headline.title, { lower: true });
+  // const slug = slugify(headline.title, { lower: true });
 
   return (
     <Card classNames={'rounded-2xl w-full'}>
@@ -19,7 +19,7 @@ const HeadlineItem = ({ headline }) => {
 
         <div className="rounded-xl bg-white p-5">
           <Link
-            to={`/story/${headline.id}/${slug}`}
+            to={`/story/${headline.slugTitle}`}
             className='font-semibold text-xl w-fit line-clamp-3'>
             {capitalizeWords(headline.title)}
           </Link>

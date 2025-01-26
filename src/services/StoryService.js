@@ -54,10 +54,10 @@ export const useHeadlines = () => {
 };
 
 // fetch a single story
-const fetchStory = async (id) => {
+const fetchStory = async (slugTitle) => {
 
   try {
-    const response = await fetch(`${api}/stories/${id}`);
+    const response = await fetch(`${api}/stories/${slugTitle}`);
 
     if (!response.ok) {
       throw new Error('Failed to fetch story');
@@ -71,10 +71,10 @@ const fetchStory = async (id) => {
   }
 }
 
-export const useStory = (id) => {
+export const useStory = (slugTitle) => {
   return useQuery({
-    queryKey: ['Story', id],
-    queryFn: () => fetchStory(id),
+    queryKey: ['Story', slugTitle],
+    queryFn: () => fetchStory(slugTitle),
   });
 };
 
@@ -82,7 +82,7 @@ export const useStory = (id) => {
 const createStory = async (payload) => {
 
   try {
-    const response = await fetch(`${api}/stories/create-story`, {
+    const response = await fetch(`${api}/stories/create`, {
       method: 'POST',
       headers: {
         // 'Authorization': `Bearer ${token}`,    //fixme - revert for user auth
