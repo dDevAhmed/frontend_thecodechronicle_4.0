@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { DocumentTextIcon, PhotoIcon, MicrophoneIcon, VideoCameraIcon } from '@heroicons/react/24/solid';
 
 const StoryTypeSelector = ({ field }) => {
+    // lift up (context)
     const [selectedType, setSelectedType] = useState(field?.value || '');
 
     const handleChange = (type) => {

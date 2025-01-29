@@ -1,10 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { useState } from 'react'
-import { PhotoIcon } from '@heroicons/react/24/solid'
 import { ChevronDownIcon } from '@heroicons/react/16/solid'
 import TinyEditor from './formelements/TinyEditor'
 import Card from '../ui/Card'
-import TagsFormInput from './formelements/TagsFormInput'
+import TagsInputCmp from './formelements/TagsInputCmp'
 import { useForm } from '@tanstack/react-form'
 import { useCreateStory } from '../services/StoryService';
 import { useCategories } from '../services/CategoryService'
@@ -12,6 +11,8 @@ import { capitalizeWords } from '../utils/capitalize'
 import StoryTypeSelector from './formelements/StoryTypeSelector'
 import Button from '../ui/Button'
 import FeedHeadlineSelector from './formelements/FeedHeadlineSelector'
+import UploadImages from './formelements/UploadImages'
+import Spinner from '../ui/Spinner'
 
 const CreateStoryForm = () => {
 
@@ -26,23 +27,18 @@ const CreateStoryForm = () => {
             setAs: '',
             tags: [],
             message: '',
+            // coverImage: '',
+            primaryMedia: '',
+            // secondaryMedia: [],
+            // authorId: '', // get from the auth user
         },
         onSubmit: async ({ value }) => {
-            // Do something with form data
             console.log(value)
             createStory(
                 value
             );
         },
     })
-
-    // todo - for primary media / cover photo , move to new component
-    const [file, setFile] = useState();
-    function handleUploadFile(e) {
-        console.log(e.target.files);
-        setFile(URL.createObjectURL(e.target.files[0]));
-    }
-
 
     return (
         <form
@@ -91,56 +87,13 @@ const CreateStoryForm = () => {
                     </div>
                 </Card>
 
-                <Card classNames={'bg-white p-5 rounded-2xl'}>
-                    <div className="col-span-full flex flex-col gap-5">
-                        <div>
-                            {/* //todo - make component */}
-                            <label htmlFor="cover-photo" className="block text-sm/6 font-medium text-gray-900">
-                                {/* //todo - change to primary photo (including the form.field name) if image type selected */}
-                                Cover photo
-                            </label>
-                            <div className='mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 bg-cover bg-center' style={{ backgroundImage: `url(${file && file})` }}>
-                                <div className="text-center">
-                                    <PhotoIcon aria-hidden="true" className="mx-auto size-12 text-gray-300" />
-                                    <div className="mt-4 flex text-sm/6 text-gray-600">
-                                        <label
-                                            htmlFor="file-upload"
-                                            className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 focus-within:outline-hidden hover:text-indigo-500"
-                                        >
-                                            <span>Upload a file</span>
-                                            <input id="file-upload" name="file-upload" type="file" className="sr-only" onChange={handleUploadFile} />
-                                        </label>
-                                        <p className="pl-1">or drag and drop</p>
-                                    </div>
-                                    <p className="text-xs/5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* //todo - work on secondary media */}
-                        <div>
-                            <label htmlFor="secondary-photos" className="block text-sm/6 font-medium text-gray-900">
-                                Secondary Photos
-                            </label>
-                            <div className='flex items-center gap-5 mt-2'>
-                                <div
-                                    className='group cursor-pointer border border-gray-900/25 rounded-md p-5 flex-1 hover:border-brand-primary-blue'
-                                >
-                                    <PhotoIcon
-                                        aria-hidden="true"
-                                        className='mx-auto size-12 group-hover:text-brand-primary-blue text-gray-300'
-                                    />
-                                </div>
-                                <div className='rounded-lg relative min-h-20 w-full bg-cover bg-no-repeat bg-center'>
-                                    <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center rounded-lg cursor-pointer">
-                                        {/* //todo - onclick trigger file upload, use plus icon */}
-                                        <span className="text-white text-2xl">+</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </Card>
+                {/* <Card classNames={'bg-white p-5 rounded-2xl'}>
+                  <form.Field name="primaryMedia">
+                    {(field) => (
+                        <UploadImages field={field} />
+                    )}
+                    </form.Field>
+                </Card> */}
 
                 <Card classNames={'bg-white p-5 rounded-2xl'}>
                     <div className="sm:col-span-3">
@@ -198,8 +151,8 @@ const CreateStoryForm = () => {
                         <div className="mt-2">
                             <form.Field name="tags">
                                 {(field) => (
-                                    <TagsFormInput field={field} />
-                                )}
+                                    <TagsInputCmp field={field} />
+                                )}  
                             </form.Field>
                         </div>
                     </div>
@@ -229,7 +182,7 @@ const CreateStoryForm = () => {
                         type="submit"
                         className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
-                        Save
+                        {isPending ? <Spinner color={'#ffffff'} size={20} /> : 'Save'}
                     </button>
                 </div>
 

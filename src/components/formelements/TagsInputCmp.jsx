@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { TagsInput } from "react-tag-input-component";
 
-const TagsFormInput = ({ field }) => {
+const TagsInputCmp = ({ field }) => {
 
     return (
         <div>
@@ -20,4 +20,4 @@ const TagsFormInput = ({ field }) => {
     );
 };
 
-export default TagsFormInput;
+export default TagsInputCmp;

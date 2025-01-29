@@ -4,14 +4,15 @@ import AuthContext from '../../contexts/AuthContext';
 
 const api = import.meta.env.VITE_API_URL
 
-const verifyEmail = async ({ otp }) => {
+const verifyEmail = async ({ email, otp }) => {
+
     try {
         const response = await fetch(`${api}/auth/verify-email`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ otp }),
+            body: JSON.stringify({ email, otp }),
         });
 
         if (!response.ok) {

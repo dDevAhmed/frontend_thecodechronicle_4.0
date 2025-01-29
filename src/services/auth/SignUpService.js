@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { useContext } from 'react';
 import AuthContext from '../../contexts/AuthContext';
+import { toast } from 'react-toastify';
 
 const api = import.meta.env.VITE_API_URL
 
@@ -34,15 +35,15 @@ export const useSignUp = () => {
     return useMutation({
         mutationFn: signUp,
         onSuccess: (data) => {
-            console.log('Sign-up successful:', data);
             if (data.access_token) {
                 login(data.access_token);
                 setShowAuthModal(false);
+                toast.success('OTP sent to email!');
+
             }
         },
         onError: (error) => {
-            // return error instead
-            console.error('Sign-up failed:', error);
+            toast.error(error.message);
         },
     });
 };

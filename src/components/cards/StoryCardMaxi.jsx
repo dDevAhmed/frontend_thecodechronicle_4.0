@@ -53,9 +53,20 @@ const StoryCardMaxi = ({ post }) => {
       </div>
 
       {/* handle different media types */}
-      {/* if post is image
-          cover image = primary media
-          if no secondary media ? single image : gallery view */}
+      {/* 
+      if post is text = no media
+      if post is image = primary media
+        if no secondary media ? single image : gallery view 
+      if post is audio = cover image 
+      if post is video = primary media 
+      */}
+
+      {post.type === 'text' ? null : null}
+
+      {post.type === 'image' && (
+        // <div className="h-[25vh] w-full bg-cover bg-no-repeat bg-center rounded-lg lg:h-[35vh]" style={{ backgroundImage: `url(${post?.primaryMedia?.url})` }}></div>
+        <div className="h-[25vh] w-full bg-cover bg-no-repeat bg-center rounded-lg lg:h-[35vh]" style={{ backgroundImage: `url(${post?.coverImage})` }}></div>    //change to above
+      )}
 
       {/* {
         post.type === 'audio'

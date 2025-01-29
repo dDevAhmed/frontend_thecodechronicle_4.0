@@ -12,7 +12,6 @@ const SignInForm = () => {
     const {
         setShowSignInForm,
         setShowRegisterEmailForm,
-        showSignUpForm, setShowSignUpForm,
     } = useContext(AuthContext)
 
     const [email, setEmail] = useState('');

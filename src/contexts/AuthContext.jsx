@@ -7,23 +7,26 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     // auth
-    const [showAuthModal, setShowAuthModal] = useState(false)
-    const [showSignInForm, setShowSignInForm] = useState(true)      //to be the default view
+    const [showAuthModal, setShowAuthModal] = useState(true)
+    const [showSignInForm, setShowSignInForm] = useState(false)      //to be the default view, change back
     const [showRegisterEmailForm, setShowRegisterEmailForm] = useState(false)
-    const [showVerifyEmailForm, setShowVerifyEmailForm] = useState(false)
-    const [showSignUpForm, setShowSignUpForm] = useState(false)
+    const [showVerifyEmailForm, setShowVerifyEmailForm] = useState(false)        //todo change back
+    const [showSignUpForm, setShowSignUpForm] = useState(true)
+
+    const [registrationEmail, setRegistrationEmail] = useState('');
 
     const [authToken, setAuthToken] = useState();
     const [authUser, setAuthUser] = useState(null);
 
-    useEffect(() => {
-        if (authToken) {
-            const decodedToken = jwtDecode(authToken);
-            setAuthUser(decodedToken);
-        } else {
-            setAuthUser(null);
-        }
-    }, [authToken]);
+    // might be use for refresh token
+    // useEffect(() => {
+    //     if (authToken) {
+    //         const decodedToken = jwtDecode(authToken);
+    //         setAuthUser(decodedToken);
+    //     } else {
+    //         setAuthUser(null);
+    //     }
+    // }, [authToken]);
 
     const login = (token) => {
         try {
@@ -63,6 +66,7 @@ export const AuthProvider = ({ children }) => {
             showSignUpForm, setShowSignUpForm,
             
             authToken, authUser, login, logout, hasRole,
+            registrationEmail, setRegistrationEmail
         }}>
             {children}
         </AuthContext.Provider>
