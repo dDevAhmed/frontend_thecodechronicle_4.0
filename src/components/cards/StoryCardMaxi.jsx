@@ -53,15 +53,15 @@ const StoryCardMaxi = ({ post }) => {
       <>
         {post.type === 'text' ? null : null}
 
-        {post.type === 'image' && post.secondaryMedia?.length > 1
-          ? (
-            // <div className="h-[25vh] w-full bg-cover bg-no-repeat bg-center rounded-lg lg:h-[35vh]" style={{ backgroundImage: `url(${post?.primaryMedia?.url})` }}></div>
+        {post.type === 'image' && (
+          post.secondaryMedia?.length > 1 ? (
             <StoryCardImageGalleryView post={post} />
-          )
-          : (
-            <img className="aspect-16/9 rounded-lg object-cover" src={post?.primaryMedia?.url} />
-          )
-        }
+          ) :
+            (
+              // <div className="h-[25vh] w-full bg-cover bg-no-repeat bg-center rounded-lg lg:h-[35vh]" style={{ backgroundImage: `url(${post?.primaryMedia?.url})` }}></div>
+              <img className="aspect-16/9 rounded-lg object-cover" src={post?.primaryMedia?.url} />
+            )
+        )}
 
         {post.type === 'audio' && (
           <StoryCardAudioView post={post} />

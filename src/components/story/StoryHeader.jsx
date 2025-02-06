@@ -23,7 +23,8 @@ const StoryHeader = ({ post }) => {
   const timeAgo = getTimeAgo(post?.createdAt);
 
   return (
-    <div className="h-full w-full bg-cover bg-no-repeat bg-top bg-fixed p-5 pb-14 lg:pb-5 relative flex flex-col md:rounded-t-2xl" style={{ backgroundImage: `url(${post?.primaryMedia.url ? post?.primaryMedia.url : PostImage})` }}>
+    <div className="h-full w-full bg-cover bg-no-repeat bg-top bg-fixed p-5 pb-14 lg:pb-5 relative flex flex-col md:rounded-t-2xl" style={{ backgroundImage: `url(${post?.primaryMedia.url && post?.type === 'image' ? post?.primaryMedia.url : PostImage})` }}>
+      
       <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black to-transparent"></div>
 
       <div className="flex items-center justify-between">
