@@ -9,7 +9,6 @@ import StoryCardVideoView from '../story/card/StoryCardVideoView';
 import StoryCardImageGalleryView from '../story/card/StoryCardImageGalleryView';
 import StoryCardActions from '../story/card/StoryCardActions';
 import DOMPurify from 'dompurify';
-import slugify from 'slugify';
 
 const StoryCardMaxi = ({ post }) => {
 
@@ -17,7 +16,6 @@ const StoryCardMaxi = ({ post }) => {
 
   const timeAgo = getTimeAgo(post.createdAt);
   const sanitizedMessage = DOMPurify.sanitize(post?.message);
-  const slug = slugify(post.title, { lower: true });
 
   return (
     <Card classNames={'bg-white p-5 rounded-2xl flex flex-col justify-between gap-5'}>
@@ -52,32 +50,31 @@ const StoryCardMaxi = ({ post }) => {
         }
       </div>
 
-      {/* handle different media types */}
-      {/* 
-      if post is text = no media
-      if post is image = primary media
-        if no secondary media ? single image : gallery view 
-      if post is audio = cover image 
-      if post is video = primary media 
-      */}
+      <>
+        {post.type === 'text' ? null : null}
 
-      {post.type === 'text' ? null : null}
+        {post.type === 'image' && post.secondaryMedia?.length > 1
+          ? (
+            // <div className="h-[25vh] w-full bg-cover bg-no-repeat bg-center rounded-lg lg:h-[35vh]" style={{ backgroundImage: `url(${post?.primaryMedia?.url})` }}></div>
+            <StoryCardImageGalleryView post={post} />
+          )
+          : (
+            <img className="aspect-16/9 rounded-lg object-cover" src={post?.primaryMedia?.url} />
+          )
+        }
 
-      {post.type === 'image' && (
-        // <div className="h-[25vh] w-full bg-cover bg-no-repeat bg-center rounded-lg lg:h-[35vh]" style={{ backgroundImage: `url(${post?.primaryMedia?.url})` }}></div>
-        <div className="h-[25vh] w-full bg-cover bg-no-repeat bg-center rounded-lg lg:h-[35vh]" style={{ backgroundImage: `url(${post?.coverImage})` }}></div>    //change to above
-      )}
+        {post.type === 'audio' && (
+          <StoryCardAudioView post={post} />
+        )}
 
-      {/* {
-        post.type === 'audio'
-          ? <StoryCardAudioView post={post} />
-          : post.type === 'image'
-            ? <div className="h-[25vh] w-full bg-cover bg-no-repeat bg-center rounded-lg lg:h-[35vh]" style={{ backgroundImage: `url(${post.primaryMedia.url})` }}></div>
-            : post.type === 'video'
-              ? <StoryCardVideoView post={post} />   //refactor, aspect ratio - 16/9
-              : post.type === 'imageGallery'
-              && <StoryCardImageGalleryView post={post} />
-      } */}
+        {post.type === 'video' && (
+          <StoryCardVideoView post={post} />
+        )}
+
+        {post?.primaryMedia?.credit && (
+          <p className='-mt-3 text-sm text-gray-600 italic'>credit: {post?.primaryMedia?.credit}</p>
+        )}
+      </>
 
       <StoryCardActions classNames={'justify-center'} />
     </Card>

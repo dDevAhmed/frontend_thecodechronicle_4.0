@@ -37,7 +37,7 @@ const AuthModal = () => {
             
             <Modal showModal={showAuthModal} setShowModal={setShowAuthModal}>
 
-                <div className='bg-white px-6 py-12 shadow-sm sm:rounded-lg sm:px-12'>
+                <div className='px-6 py-12 shadow-sm sm:rounded-lg sm:px-12'>
                     <div className={showSignInForm ? 'block' : 'hidden'}>
                         <SignInForm />
                     </div>

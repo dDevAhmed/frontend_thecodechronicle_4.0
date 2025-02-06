@@ -13,6 +13,7 @@ import TagsInputCmp from './formelements/TagsInputCmp'
 import StoryTypeSelector from './formelements/StoryTypeSelector'
 import FeedHeadlineSelector from './formelements/FeedHeadlineSelector'
 import ImageUpload from './formelements/ImageUpload';
+import ImagesUpload from './formelements/ImagesUpload';
 
 const CreateStoryForm = () => {
 
@@ -33,12 +34,7 @@ const CreateStoryForm = () => {
                 url: '',
                 credit: ''
             },
-            // secondaryMedia: [
-            //     {
-            //         url: 'uploadMediaData',
-            //         credit: ''
-            //     },
-            // ],
+            secondaryMedia: [],
             // authorId: '', // get from the auth user
         },
         onSubmit: async ({ value }) => {
@@ -105,6 +101,7 @@ const CreateStoryForm = () => {
                                         onChange={(e) => field.handleChange(e.target.value)}
                                         id="title"
                                         type="text"
+                                        required
                                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                                     />
                                 )}
@@ -113,10 +110,16 @@ const CreateStoryForm = () => {
                     </div>
                 </Card>
 
-                <Card classNames={'bg-white p-5 rounded-2xl'}>
+                <Card classNames={'bg-white p-5 rounded-2xl flex flex-col gap-5'}>
                     <form.Field name="primaryMedia">
                         {(field) => (
                             <ImageUpload field={field} />
+                        )}
+                    </form.Field>
+
+                    <form.Field name="secondaryMedia">
+                        {(field) => (
+                            <ImagesUpload field={field} />
                         )}
                     </form.Field>
                 </Card>
@@ -135,6 +138,7 @@ const CreateStoryForm = () => {
                                             value={field.state.value}
                                             onBlur={field.handleBlur}
                                             onChange={(e) => field.handleChange(e.target.value)}
+                                            required
                                             id="category"
                                             className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                                         >

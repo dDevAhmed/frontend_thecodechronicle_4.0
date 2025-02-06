@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
 import { PhotoIcon } from '@heroicons/react/24/solid';
-import ImagesUpload from './ImagesUpload';
 
 const ImageUpload = ({ field }) => {
     const [file, setFile] = useState(field?.state?.value?.url || '');
@@ -79,8 +78,6 @@ const ImageUpload = ({ field }) => {
                     />
                 </div>
             </div>
-
-            <ImagesUpload field={field} />
         </div>
     );
 };
