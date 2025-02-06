@@ -20,6 +20,7 @@ fixme
             data?.response.error otherwise
 10. always return to callback_url (url shown before requesting auth)
 11. install tinymce editor locally for slow/failed network
+12. ERROR RESPONSES
 
 note
 1 manifest.json was added to remove browser's address bar and mobile navigation

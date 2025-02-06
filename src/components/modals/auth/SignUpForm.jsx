@@ -9,6 +9,7 @@ const SignUpForm = () => {
     // todo 
     // input fields validation - tanstack form
     // get verified email and populate the email field - save user from retyping email
+    // when switch to sign up form, disable click outside to close modal
 
     const { registrationEmail } = useContext(AuthContext);
 
@@ -18,7 +19,7 @@ const SignUpForm = () => {
         defaultValues: {
             firstName: '',
             lastName: '',
-            email: '',      //set the registration from context - registrationEmail
+            email: registrationEmail,      //set the registration from context - registrationEmail
             password: '',
         },
         onSubmit: async ({ value }) => {
@@ -53,7 +54,7 @@ const SignUpForm = () => {
                                 type="text"
                                 placeholder='First Name'
                                 required
-                                className="block w-full rounded-md bg-white border px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                className="block w-full rounded-md bg-white border px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-brand-primary-blue sm:text-sm/6"
                             />
                         )}
                     </form.Field>
@@ -71,7 +72,7 @@ const SignUpForm = () => {
                                 type="text"
                                 placeholder='Last Name'
                                 required
-                                className="block w-full rounded-md bg-white border px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                className="block w-full rounded-md bg-white border px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-brand-primary-blue sm:text-sm/6"
                             />
                         )}
                     </form.Field>
@@ -88,10 +89,11 @@ const SignUpForm = () => {
                                 onChange={(e) => field.handleChange(e.target.value)}
                                 id="email"
                                 type="email"
-                                placeholder='Email'
-                                required
-                                autoComplete="email"
-                                className="block w-full rounded-md bg-white border px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                // placeholder='Email'
+                                // required
+                                disabled
+                                // autoComplete="email"
+                                className="block w-full rounded-md bg-white border px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-brand-primary-blue sm:text-sm/6"
                             />
                         )}
                     </form.Field>
@@ -109,7 +111,7 @@ const SignUpForm = () => {
                                 type="password"
                                 placeholder='Password'
                                 required
-                                className="block w-full rounded-md bg-white border px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                className="block w-full rounded-md bg-white border px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-brand-primary-blue sm:text-sm/6"
                             />
                         )}
                     </form.Field>
@@ -118,7 +120,7 @@ const SignUpForm = () => {
                 <div>
                     <button
                         type="submit"
-                        className="flex w-full justify-center rounded-md bg-brand-blue px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        className="flex w-full justify-center rounded-md bg-brand-primary-blue px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary-blue"
                     >
                         {isPending ? <Spinner color={'#ffffff'} size={20} /> : 'Sign up'}
                     </button>

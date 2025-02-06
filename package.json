@@ -11,6 +11,8 @@
     },
     "dependencies": {
         "@ckeditor/ckeditor5-react": "^9.4.0",
+        "@cloudinary/react": "^1.13.1",
+        "@cloudinary/url-gen": "^1.21.0",
         "@headlessui/react": "^2.1.8",
         "@heroicons/react": "^2.1.5",
         "@tanstack/react-form": "^0.41.3",

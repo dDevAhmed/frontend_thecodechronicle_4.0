@@ -111,7 +111,7 @@ export const useCreateStory = () => {
     mutationFn: createStory,
     // mutationFn: (payload) => createStory({ payload, token: authToken }),
     onSuccess: (data) => {
-      toast.success('Story created successful!');
+      toast.success('Story created successful!', data);
     },
     onError: (error) => {
       toast.error(error.message);

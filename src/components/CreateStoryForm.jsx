@@ -1,23 +1,24 @@
 /* eslint-disable no-unused-vars */
-import { useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/16/solid'
-import TinyEditor from './formelements/TinyEditor'
-import Card from '../ui/Card'
-import TagsInputCmp from './formelements/TagsInputCmp'
 import { useForm } from '@tanstack/react-form'
 import { useCreateStory } from '../services/StoryService';
 import { useCategories } from '../services/CategoryService'
 import { capitalizeWords } from '../utils/capitalize'
-import StoryTypeSelector from './formelements/StoryTypeSelector'
-import Button from '../ui/Button'
-import FeedHeadlineSelector from './formelements/FeedHeadlineSelector'
-import UploadImages from './formelements/UploadImages'
+import { useUploadMedia } from '../services/MediaService'
+import Card from '../ui/Card'
 import Spinner from '../ui/Spinner'
+import Button from '../ui/Button'
+import TinyEditor from './formelements/TinyEditor'
+import TagsInputCmp from './formelements/TagsInputCmp'
+import StoryTypeSelector from './formelements/StoryTypeSelector'
+import FeedHeadlineSelector from './formelements/FeedHeadlineSelector'
+import ImageUpload from './formelements/ImageUpload';
 
 const CreateStoryForm = () => {
 
     const { mutate: createStory, isPending, isError, error, isSuccess } = useCreateStory();
     const { data: categories, isPending: categoriesPending, isError: categoriesError } = useCategories()
+    const { mutateAsync: uploadMedia, data: uploadMediaData, isPending: mediaPending, isError: mediaIsError, error: mediaError, isSuccess: medialUploadSuccess } = useUploadMedia();
 
     const form = useForm({
         defaultValues: {
@@ -28,17 +29,42 @@ const CreateStoryForm = () => {
             tags: [],
             message: '',
             // coverImage: '',
-            primaryMedia: '',
-            // secondaryMedia: [],
+            primaryMedia: {
+                url: '',
+                credit: ''
+            },
+            // secondaryMedia: [
+            //     {
+            //         url: 'uploadMediaData',
+            //         credit: ''
+            //     },
+            // ],
             // authorId: '', // get from the auth user
         },
         onSubmit: async ({ value }) => {
-            console.log(value)
-            createStory(
-                value
-            );
+            console.log('CreateStoryForm - Form values:', value);
+
+            if (value.primaryMedia?.file) {
+                try {
+                    const uploadedMediaUrl = await uploadMedia(value.primaryMedia.file);
+                    value.primaryMedia.url = uploadedMediaUrl;
+
+                } catch (error) {
+                    console.error('Upload failed:', error.message);
+                    return error.message;
+                }
+            }
+
+            // Remove the `file` field from primaryMedia before sending to the backend
+            const { file, ...primaryMediaWithoutFile } = value.primaryMedia;
+            const formData = {
+                ...value,
+                primaryMedia: primaryMediaWithoutFile,
+            };
+
+            createStory(formData);
         },
-    })
+    });
 
     return (
         <form
@@ -87,13 +113,13 @@ const CreateStoryForm = () => {
                     </div>
                 </Card>
 
-                {/* <Card classNames={'bg-white p-5 rounded-2xl'}>
-                  <form.Field name="primaryMedia">
-                    {(field) => (
-                        <UploadImages field={field} />
-                    )}
+                <Card classNames={'bg-white p-5 rounded-2xl'}>
+                    <form.Field name="primaryMedia">
+                        {(field) => (
+                            <ImageUpload field={field} />
+                        )}
                     </form.Field>
-                </Card> */}
+                </Card>
 
                 <Card classNames={'bg-white p-5 rounded-2xl'}>
                     <div className="sm:col-span-3">
@@ -152,7 +178,7 @@ const CreateStoryForm = () => {
                             <form.Field name="tags">
                                 {(field) => (
                                     <TagsInputCmp field={field} />
-                                )}  
+                                )}
                             </form.Field>
                         </div>
                     </div>

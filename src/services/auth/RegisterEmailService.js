@@ -18,12 +18,10 @@ const registerEmail = async ({ email }) => {
         const data = await response.json();
 
         if (!response.ok) {
-            console.log('response from api says error', data)
             throw new Error(data?.response.error || 'Failed to register email');
             // throw new Error(data?.message || 'Failed to register email');       //todo use the one above
         }
 
-        console.log('response from api says success', data)
         return data;
     } catch (error) {
         throw new Error(error.message);
@@ -36,10 +34,9 @@ export const useRegisterEmail = () => {
     return useMutation({
         mutationFn: registerEmail,
         onSuccess: (data) => {
-            console.log('Email registered successfully:', data);
             showRegisterEmailForm(false);
             setShowVerifyEmailForm(true)
-            toast.success('OTP sent to email!');
+            toast.success('OTP sent to email!', data);
         },
         onError: (error) => {
             toast.error(error.message);

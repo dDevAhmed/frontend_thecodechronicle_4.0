@@ -7,11 +7,11 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     // auth
-    const [showAuthModal, setShowAuthModal] = useState(true)
+    const [showAuthModal, setShowAuthModal] = useState(false)
     const [showSignInForm, setShowSignInForm] = useState(false)      //to be the default view, change back
     const [showRegisterEmailForm, setShowRegisterEmailForm] = useState(false)
     const [showVerifyEmailForm, setShowVerifyEmailForm] = useState(false)        //todo change back
-    const [showSignUpForm, setShowSignUpForm] = useState(true)
+    const [showSignUpForm, setShowSignUpForm] = useState(false)
 
     const [registrationEmail, setRegistrationEmail] = useState('');
 

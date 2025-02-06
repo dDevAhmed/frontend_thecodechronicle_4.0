@@ -39,7 +39,6 @@ export const useSignUp = () => {
                 login(data.access_token);
                 setShowAuthModal(false);
                 toast.success('OTP sent to email!');
-
             }
         },
         onError: (error) => {
