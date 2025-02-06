@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { capitalizeWords } from '../../utils/capitalize'
 import { IoChevronBack } from "react-icons/io5";
@@ -24,10 +23,8 @@ const StoryHeader = ({ post }) => {
   const timeAgo = getTimeAgo(post?.createdAt);
 
   return (
-    // fixme - use default image if no primaryMedia/coverImage
-    // <div className="h-full w-full bg-cover bg-no-repeat bg-center bg-fixed p-5 pb-14 lg:pb-5 relative flex flex-col md:rounded-t-2xl" style={{ backgroundImage: `url(${post?.primaryMedia.url ? post?.primaryMedia.url : PostImage})` }}>
-    <div className="h-full w-full bg-cover bg-no-repeat bg-center bg-fixed p-5 pb-14 lg:pb-5 relative flex flex-col md:rounded-t-2xl" style={{ backgroundImage: `url(${PostImage})` }}>
-      <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gray-700 to-transparent"></div>
+    <div className="h-full w-full bg-cover bg-no-repeat bg-top bg-fixed p-5 pb-14 lg:pb-5 relative flex flex-col md:rounded-t-2xl" style={{ backgroundImage: `url(${post?.primaryMedia.url ? post?.primaryMedia.url : PostImage})` }}>
+      <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black to-transparent"></div>
 
       <div className="flex items-center justify-between">
         <Button onClick={handleGoBack} classNames={"bg-white rounded-full px-2 py-2"}><IoChevronBack className='h-5 w-auto' /></Button>
