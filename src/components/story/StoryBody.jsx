@@ -29,7 +29,7 @@ const StoryBody = ({ post }) => {
         </div>
 
         {/* dangerouslySetInnerHTML is used to render html tags in react */}
-        <p dangerouslySetInnerHTML={{ __html: sanitizedMessage }}></p>
+        <p dangerouslySetInnerHTML={{ __html: sanitizedMessage }} className='text-justify'></p>
 
         <div className='flex justify-center md:justify-between items-center mt-5'>
           <Button
@@ -38,7 +38,7 @@ const StoryBody = ({ post }) => {
           >
             125 comments
           </Button>
-          <div className='hidden md:flex'><StoryCardActions /></div>
+          <div className='hidden md:flex'><StoryCardActions post={post} /></div>
         </div>
       </div>
     </div>

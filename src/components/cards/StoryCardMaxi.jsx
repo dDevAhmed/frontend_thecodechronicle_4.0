@@ -76,7 +76,7 @@ const StoryCardMaxi = ({ post }) => {
         )}
       </>
 
-      <StoryCardActions classNames={'justify-center'} />
+      <StoryCardActions post={post} classNames={'justify-center'} />
     </Card>
   )
 }

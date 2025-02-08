@@ -2,7 +2,7 @@ import React from 'react'
 import Button from '../../../ui/Button'
 import { PiBookmarkSimpleLight, PiShareFatLight, PiThumbsUp } from 'react-icons/pi'
 
-const StoryCardActions = ({ classNames }) => {
+const StoryCardActions = ({ post, classNames }) => {
 
     // todos 
     // change bookmark state
