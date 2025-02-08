@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { useContext } from 'react';
 import AuthContext from '../contexts/AuthContext';
 import useAuthStatusHook from '../hooks/useAuthStatusHook';
@@ -6,14 +6,9 @@ import useAuthStatusHook from '../hooks/useAuthStatusHook';
 
 const PrivateRoutes = () => {
 
-    const { authToken, user, logout, setShowAuthModal } = useContext(AuthContext);
+    const { setShowAuthModal } = useContext(AuthContext);
 
-    // const { loggedIn, checkStatus } = UserAuthStatus();
     const { loggedIn } = useAuthStatusHook();
-
-    // if (checkStatus) {
-    // return <Spinner />
-    // }
 
     if (!loggedIn) {
         setShowAuthModal(true);

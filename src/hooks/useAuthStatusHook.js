@@ -12,9 +12,7 @@ const useAuthStatusHook = () => {
 
     // logged in checks for session
 
-    // note - for test only set to true
     const [loggedIn, setLoggedIn] = useState(false)
-    // const [checkStatus, setCheckStatus] = useState(true)
 
     useEffect(() => {
         if (authToken) {

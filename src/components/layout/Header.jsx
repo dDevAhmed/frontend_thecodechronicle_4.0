@@ -3,6 +3,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { Link, useLocation } from "react-router-dom";
 import { HiOutlineBell } from "react-icons/hi2";
 import { GoDotFill } from "react-icons/go";
+import { TbUser } from "react-icons/tb";
 // import { useWeather } from "../../services/Weather";
 // import { weatherCondition } from "../../features/weather/weather";
 import AppContext from "../../contexts/AppContext";
@@ -10,14 +11,24 @@ import AppLogo from '../../assets/images/TestLogo.png'
 import Button from "../../ui/Button";
 import SearchBar from '../../ui/SearchBar'
 import Card from "../../ui/Card";
+import useAuthStatusHook from "../../hooks/useAuthStatusHook";
+import AuthContext from "../../contexts/AuthContext";
+import DefaultAvatar from '../../assets/images/default_avatar.png'
 
 const Header = () => {
+    const { loggedIn } = useAuthStatusHook();
+    const { authUser, setShowAuthModal } = useContext(AuthContext);
+
     const {
         setOpenMobileDrawer,
         showMediumLargeSearchResults, setShowMediumLargeSearchResults
     } = useContext(AppContext)
 
     const [headerSearchBarQuery, setHeaderSearchBarQuery] = useState('');
+
+    const handleLogIn = () => {
+        setShowAuthModal(true);
+    }
 
     return (
         <header className="bg-brand-background-gray shrink-0 p-[1.125rem] w-full">
@@ -26,7 +37,7 @@ const Header = () => {
                 <div className='flex gap-5 items-center'>
                     <RxHamburgerMenu className='md:hidden' onClick={() => setOpenMobileDrawer(true)} />
                     <img
-                        alt="Your Company"
+                        alt="The Code Chronicle logo"
                         src={AppLogo}
                         className="h-8 w-auto"
                     />
@@ -65,23 +76,30 @@ const Header = () => {
                         <GoDotFill className="h-5 w-auto absolute top-1 right-2 text-red-500" />
                     </Button>
 
-                    <a href="#" className="hidden md:flex -m-1.5 p-1.5 items-center gap-2">
-                        <span className="sr-only">Your profile</span>
-                        <img
-                            alt=""
-                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                            className="h-10 w-auto rounded-full bg-gray-800"
-                        />
-                        {/* <span className="hidden">
-                            <p className='text-sm text-[#072635] font-semibold'>Dr. Jose Simmons</p>
-                            <p className='text-sm text-[#707070]'>General Practitioner</p>
-                        </span> */}
-                    </a>
-                    {/* <div className='w-[.0625rem] h-10 bg-[#EDEDED] hidden lg:block'></div>
-                    <span className='items-center hidden lg:flex'>
-                        <Button><img src={Settings} alt='settings' className='h-4 w-auto' /></Button>
-                        <Button><img src={MoreVertical} alt='more' className='h-4 w-auto' /></Button>
-                    </span> */}
+                    {
+                        !loggedIn ? (
+                            <div className="hidden md:flex items-center gap-2">
+                                <Button onClick={handleLogIn}>
+                                    <TbUser className='h-8 w-auto text-gray-500' />
+                                </Button>
+                            </div>
+                        ) : (
+
+                            <Link to="/account" className="hidden md:flex -m-1.5 p-1.5 items-center gap-2">
+                                <span className="sr-only">Your profile</span>
+                                <img
+                                    alt="user image"
+                                    // todo - use avatar util
+                                    src={authUser?.avatar || DefaultAvatar}
+                                    className="h-10 w-auto rounded-full bg-gray-800"
+                                />
+                                {/* <span className="hidden">
+                                    <p className='text-sm text-[#072635] font-semibold'>Dr. Jose Simmons</p>
+                                    <p className='text-sm text-[#707070]'>General Practitioner</p>
+                                </span> */}
+                            </Link>
+                        )
+                    }
                 </div>
             </div>
         </header >

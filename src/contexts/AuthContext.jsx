@@ -41,7 +41,6 @@ export const AuthProvider = ({ children }) => {
             throw new Error("Error finding user", error);
             
         }
-        // localStorage.setItem('access_token', token);        //fixme - remove all storage to local storage
     };
 
     const logout = () => {
