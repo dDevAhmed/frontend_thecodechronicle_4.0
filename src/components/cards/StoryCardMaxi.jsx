@@ -72,7 +72,7 @@ const StoryCardMaxi = ({ post }) => {
         )}
 
         {post?.primaryMedia?.credit && (
-          <p className='-mt-3 text-sm text-gray-600 italic'>credit: {post?.primaryMedia?.credit}</p>
+          <p className='-mt-3 text-sm text-gray-600 italic'>photo credit: {post?.primaryMedia?.credit}</p>
         )}
       </>
 
