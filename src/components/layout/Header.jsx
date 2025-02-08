@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { HiOutlineBell } from "react-icons/hi2";
 import { GoDotFill } from "react-icons/go";
 import { TbUser } from "react-icons/tb";
@@ -17,7 +17,7 @@ import DefaultAvatar from '../../assets/images/default_avatar.png'
 
 const Header = () => {
     const { loggedIn } = useAuthStatusHook();
-    const { authUser, setShowAuthModal } = useContext(AuthContext);
+    const { authUser } = useContext(AuthContext);
 
     const {
         setOpenMobileDrawer,
@@ -25,10 +25,6 @@ const Header = () => {
     } = useContext(AppContext)
 
     const [headerSearchBarQuery, setHeaderSearchBarQuery] = useState('');
-
-    const handleLogIn = () => {
-        setShowAuthModal(true);
-    }
 
     return (
         <header className="bg-brand-background-gray shrink-0 p-[1.125rem] w-full">
@@ -76,30 +72,25 @@ const Header = () => {
                         <GoDotFill className="h-5 w-auto absolute top-1 right-2 text-red-500" />
                     </Button>
 
-                    {
-                        !loggedIn ? (
-                            <div className="hidden md:flex items-center gap-2">
-                                <Button onClick={handleLogIn}>
-                                    <TbUser className='h-8 w-auto text-gray-500' />
-                                </Button>
-                            </div>
-                        ) : (
-
-                            <Link to="/account" className="hidden md:flex -m-1.5 p-1.5 items-center gap-2">
-                                <span className="sr-only">Your profile</span>
+                    <Link to="/account" className="hidden md:flex -m-1.5 p-1.5 items-center gap-2">
+                        <span className="sr-only">Your profile</span>
+                        {
+                            loggedIn ? (
                                 <img
                                     alt="user image"
                                     // todo - use avatar util
                                     src={authUser?.avatar || DefaultAvatar}
                                     className="h-10 w-auto rounded-full bg-gray-800"
                                 />
-                                {/* <span className="hidden">
+                            ) : (
+                                <TbUser className='h-8 w-auto text-gray-500' />
+                            )
+                        }
+                        {/* <span className="hidden">
                                     <p className='text-sm text-[#072635] font-semibold'>Dr. Jose Simmons</p>
                                     <p className='text-sm text-[#707070]'>General Practitioner</p>
                                 </span> */}
-                            </Link>
-                        )
-                    }
+                    </Link>
                 </div>
             </div>
         </header >

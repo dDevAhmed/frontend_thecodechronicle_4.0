@@ -11,6 +11,7 @@ import ProtectedRoutes from "./ProtectedRoutes"
 import CreateStory from "../pages/admin/CreateStory"
 import Story from '../pages/Story'
 import OtpInputCmp from "../components/formelements/OtpInputCmp"
+import Account from "../pages/Account"
 
 const router = createBrowserRouter([
     // /post/new -> add new post (protected, admin layout)
@@ -50,7 +51,7 @@ const router = createBrowserRouter([
             //     path: 'tag/:tag',
             //     element: <Tag />
             // },
-            // todo remove after 
+            // todo move to (S)admin layout 
             {
                 path: 'stories/create',
                 element: <CreateStory />
@@ -62,10 +63,11 @@ const router = createBrowserRouter([
                         path: 'saved',
                         element: <Saved />
                     },
-                    // {
-                    //     path: 'account',
-                    //     element: <Account />
-                    // },
+                    {
+                        path: 'account',
+                        element: <Account />
+                    },
+                     // todo move to (S)admin layout 
                     {
                         element: <ProtectedRoutes requiredRole={'admin'} />,
                         children: [
@@ -80,6 +82,7 @@ const router = createBrowserRouter([
             },
         ]
     },
+    // here goes (S)admin layout - protected and private included
 ]);
 
 export default router;
