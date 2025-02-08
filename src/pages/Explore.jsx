@@ -7,7 +7,9 @@ import PageTitle from '../ui/PageTitle';
 import AppContext from '../contexts/AppContext';
 
 const Explore = () => {
-
+    // fixme - not a good approach - land at the top by default
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
     const { initiateExploreSearch } = useContext(AppContext);
 
     return (

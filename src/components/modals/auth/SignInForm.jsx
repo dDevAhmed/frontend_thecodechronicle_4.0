@@ -2,30 +2,32 @@ import { useState, useContext } from 'react'
 import { useSignIn } from '../../../services/auth/SignInService';
 import AuthContext from "../../../contexts/AuthContext";
 import Spinner from '../../../ui/Spinner';
+import { useForm } from '@tanstack/react-form';
 
 const SignInForm = () => {
 
+    // todo 
+    // input fields validation - tanstack form
     // do the auth check before showing the sign in modal
-    // make into different component - sign in, sign up, otp
-    // when switch to otp form, disable click outside to close modal
 
     const {
         setShowSignInForm,
         setShowRegisterEmailForm,
     } = useContext(AuthContext)
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
     const { mutate: signIn, isPending, isError, error, isSuccess } = useSignIn();
 
-    const handleSignIn = async (event) => {
-        event.preventDefault();
-
-        signIn(
-            { email, password },
-        );
-    };
+    const form = useForm({
+        defaultValues: {
+            email: '',
+            password: '',
+        },
+        onSubmit: async ({ value }) => {
+            signIn(
+                value
+            );
+        },
+    })
 
     const handleSwitchForm = async () => {
         setShowSignInForm(false)
@@ -36,36 +38,51 @@ const SignInForm = () => {
 
         <>
             <h2 className="mb-6 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-                Sign in to your account
+                Sign in to continue
             </h2>
 
-            <form onSubmit={handleSignIn} className='space-y-6'>
+            <form
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    form.handleSubmit();
+                }} className='space-y-6'>
                 <div className="mt-2">
-                    <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder='Email'
-                        required
-                        autoComplete="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="block w-full rounded-md bg-white border px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                    />
+                    {/* //todo - get verified email from context */}
+                    <form.Field name="email">
+                        {(field) => (
+                            <input
+                                name={field.name}
+                                value={field.state.value}
+                                onBlur={field.handleBlur}
+                                onChange={(e) => field.handleChange(e.target.value)}
+                                id="email"
+                                type="email"
+                                placeholder='Email'
+                                required
+                                autoComplete="email"
+                                className="block w-full rounded-md bg-white border px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-brand-primary-blue sm:text-sm/6"
+                            />
+                        )}
+                    </form.Field>
                 </div>
 
                 <div className="mt-2">
-                    <input
-                        id="password"
-                        name="password"
-                        type="password"
-                        placeholder='Password'
-                        required
-                        autoComplete="current-password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="block w-full rounded-md bg-white border px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                    />
+                    <form.Field name="password">
+                        {(field) => (
+                            <input
+                                name={field.name}
+                                value={field.state.value}
+                                onBlur={field.handleBlur}
+                                onChange={(e) => field.handleChange(e.target.value)}
+                                id="password"
+                                type="password"
+                                placeholder='Password'
+                                required
+                                className="block w-full rounded-md bg-white border px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-brand-primary-blue sm:text-sm/6"
+                            />
+                        )}
+                    </form.Field>
                 </div>
 
                 <div className="flex items-center justify-between">
@@ -76,7 +93,7 @@ const SignInForm = () => {
                                     id="remember-me"
                                     name="remember-me"
                                     type="checkbox"
-                                    className="col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
+                                    className="col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-brand-primary-blue checked:bg-brand-primary-blue indeterminate:border-brand-primary-blue indeterminate:bg-brand-primary-blue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary-blue disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
                                 />
                                 <svg
                                     fill="none"
@@ -106,7 +123,7 @@ const SignInForm = () => {
                     </div>
 
                     <div className="text-sm/6">
-                        <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                        <a href="#" className="font-semibold text-brand-primary-blue hover:text-indigo-500">
                             Forgot password?
                         </a>
                     </div>
@@ -115,7 +132,7 @@ const SignInForm = () => {
                 <div>
                     <button
                         type="submit"
-                        className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        className="flex w-full justify-center rounded-md bg-brand-primary-blue px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary-blue"
                     >
                         {isPending ? <Spinner color={'#ffffff'} size={20} /> : 'Sign in'}
                     </button>
@@ -179,7 +196,7 @@ const SignInForm = () => {
 
             <p className="mt-10 text-center text-sm/6 text-gray-500">
                 Don't have an account? {' '}
-                <button onClick={handleSwitchForm} className="font-semibold text-indigo-600 hover:text-indigo-500">
+                <button onClick={handleSwitchForm} className="font-semibold text-brand-primary-blue hover:text-indigo-500">
                     Sign Up Here
                 </button>
             </p>
