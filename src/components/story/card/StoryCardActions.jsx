@@ -18,7 +18,7 @@ const StoryCardActions = ({ post, classNames }) => {
     } = useContext(StoryContext);
 
     const handleLikeButtonClicked = () => {
-        // increment post like count
+        // increment/decrement post like count
         // set post like state
         setLikePost(!likePost);
     }
