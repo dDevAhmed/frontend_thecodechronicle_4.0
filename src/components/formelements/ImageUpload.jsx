@@ -44,7 +44,7 @@ const ImageUpload = ({ field }) => {
                     className='mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 md:py-28 bg-cover bg-center bg-no-repeat'
                     style={{ backgroundImage: `url(${file})` }}
                 >
-                    <div className="text-center aspect-16/9">
+                    <div className="text-center">
                         <PhotoIcon aria-hidden="true" className="mx-auto size-12 text-gray-300" />
                         <div className="mt-4 flex text-sm/6 text-gray-600">
                             <label

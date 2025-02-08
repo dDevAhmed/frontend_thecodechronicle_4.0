@@ -33,18 +33,12 @@ const StoryHeader = ({ post }) => {
       </div>
 
       <div className="flex-1 flex items-end z-10">
-        <div className='flex flex-col gap-3 w-full'>
-          {/* <p className='text-sm text-white'>{timeAgo}</p> */}
+        <div className='flex flex-col gap-3'>
           <Link to={`/category/${post?.category.name}`}>
             <Pill text={post?.category.name} classNames={'bg-white text-[.875rem]'} />
           </Link>
           <h3 className='font-semibold text-2xl text-white'>{capitalizeWords(post?.title)}</h3>
-          <span className='flex items-center justify-between'>
-            <p className='text-sm text-white'>{timeAgo}</p>
-            {post?.primaryMedia?.credit && (
-              <p className='text-xs text-white italic'>photo credit: {post?.primaryMedia?.credit}</p>
-            )}
-          </span>
+          <p className='text-sm text-white'>{timeAgo}</p>
         </div>
       </div>
     </div>

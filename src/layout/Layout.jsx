@@ -11,7 +11,6 @@ import SubscribeNewsletter from "../components/SubscribeNewsletter";
 import DesktopNavigation from "../components/layout/DesktopNavigation";
 import MobileSearchModal from "../components/modals/MobileSearchModal";
 import AuthModal from "../components/modals/auth/AuthModal";
-import ComingSoon from "../components/modals/ComingSoon";
 
 export default function Layout() {
     const location = useLocation()
@@ -23,8 +22,6 @@ export default function Layout() {
 
     return (
         <div className='w-full'>
-            <ComingSoon />
-
             <MobileDrawer />
 
             <div className={`${isNewsOrBlogPage(location.pathname) && 'hidden md:flex'} sticky top-0 z-40`}>

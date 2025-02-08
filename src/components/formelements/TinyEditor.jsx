@@ -4,6 +4,7 @@ import { Editor } from '@tinymce/tinymce-react';
 const TinyEditor = ({ field }) => {
 
     return (
+
         <Editor
             apiKey={import.meta.env.VITE_TINYMCE_API_KEY}
             init={{
@@ -28,7 +29,8 @@ const TinyEditor = ({ field }) => {
             value={field.state.value}
             onEditorChange={(newValue) => field.handleChange(newValue)}
             onBlur={field.handleBlur} // Trigger validation on blur
-        />        
+        />
+
     );
 }
 
