@@ -1,7 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useContext } from 'react';
 import AuthContext from '../../contexts/AuthContext';
-import { toast } from 'react-toastify';
 
 const api = import.meta.env.VITE_API_URL
 
@@ -22,6 +21,7 @@ const verifyEmail = async ({ email, otp }) => {
         }
 
         const data = await response.json();
+        console.log('response from api says', data)
         return data;
     } catch (error) {
         throw new Error(error.message);
@@ -35,12 +35,13 @@ export const useVerifyEmail = () => {
     return useMutation({
         mutationFn: verifyEmail,
         onSuccess: (data) => {
+            console.log('Email verify successfully:', data);
             setShowVerifyEmailForm(false)
             setShowSignUpForm(true)
-            toast.success('Email verified successfully!', data);
+
         },
         onError: (error) => {
-            toast.error(error.message);
+            console.error('Email verification failed:', error);
         },
     });
 };

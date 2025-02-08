@@ -6,9 +6,6 @@ import { useForm } from '@tanstack/react-form';
 
 const RegisterEmailForm = () => {
 
-    // todo 
-    // input fields validation - tanstack form
-
     const {
         setShowSignInForm, setShowRegisterEmailForm,
         setRegistrationEmail,
@@ -21,6 +18,8 @@ const RegisterEmailForm = () => {
             email: '',
         },
         onSubmit: async ({ value }) => {
+            // Do something with form data
+            console.log('Registration email', value)
             registerEmail(
                 value
             );
@@ -58,8 +57,7 @@ const RegisterEmailForm = () => {
                                 placeholder='Email'
                                 required
                                 autoComplete="email"
-                                className="block w-full rounded-md bg-white border px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-brand-primary-blue sm:text-sm/6"
-
+                                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                             />
                         )}
                     </form.Field>
@@ -67,7 +65,7 @@ const RegisterEmailForm = () => {
                 <div>
                     <button
                         type="submit"
-                        className="flex w-full justify-center rounded-md bg-brand-primary-blue px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary-blue"
+                        className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
                         {isPending ? <Spinner color={'#ffffff'} size={20} /> : 'Register'}
                     </button>
@@ -76,7 +74,7 @@ const RegisterEmailForm = () => {
 
             <p className="mt-10 text-center text-sm/6 text-gray-500">
                 Have an account? {' '}
-                <button onClick={handleSwitchForm} className="font-semibold text-brand-primary-blue hover:text-indigo-500">
+                <button onClick={handleSwitchForm} className="font-semibold text-indigo-600 hover:text-indigo-500">
                     Sign In Here
                 </button>
             </p>

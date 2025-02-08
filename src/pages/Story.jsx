@@ -13,6 +13,8 @@ const Story = () => {
 
     const { data: post, isPending, isError } = useStory(slugTitle)
 
+    console.log('story page says ', post)
+    
     if (isPending) {
         return <div className='flex items-center justify-center p-10'><Spinner /></div>;
     }

@@ -6,9 +6,7 @@ import { useForm } from '@tanstack/react-form';
 import AuthContext from '../../../contexts/AuthContext';
 
 const VerifyEmailForm = () => {
-
-    // todo 
-    // input fields validation - tanstack form
+    // do the auth check before showing the sign in modal
     // when switch to otp form, disable click outside to close modal
     // if otp value.length = 6, auto submit
 
@@ -39,7 +37,7 @@ const VerifyEmailForm = () => {
     return (
         <>
             <h2 className="mb-6 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-                Enter OTP sent to {registrationEmail}
+                Enter OTP sent to email
             </h2>
             <form
                 onSubmit={(e) => {
@@ -55,14 +53,14 @@ const VerifyEmailForm = () => {
                 <div className='mt-5'>
                     <button
                         type="submit"
-                        className="flex w-full justify-center rounded-md bg-brand-primary-blue px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary-blue"
+                        className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
                         {isPending ? <Spinner color={'#ffffff'} size={20} /> : 'Send'}
                     </button>
                 </div>
             </form>
             {/* //todo - include timer here */}
-            <div className="text-sm text-slate-500 mt-4 text-center">Didn't receive code? <a className="font-medium text-indigo-500 hover:text-brand-primary-blue" href="#0">Resend</a></div>
+            <div className="text-sm text-slate-500 mt-4 text-center">Didn't receive code? <a className="font-medium text-indigo-500 hover:text-indigo-600" href="#0">Resend</a></div>
         </>
     )
 }

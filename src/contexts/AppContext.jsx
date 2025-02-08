@@ -7,6 +7,8 @@ export const AppContext = createContext();
 export const AppProvider = ({ children }) => {
     // const { data, isLoading, error } = useWeather()
 
+    const [showComingSoonModal, setShowComingSoonModal] = useState(false)
+
     const [openMobileDrawer, setOpenMobileDrawer] = useState(false)
 
     const [searchBarQuery, setSearchBarQuery] = useState('')
@@ -21,6 +23,8 @@ export const AppProvider = ({ children }) => {
 
     return (
         <AppContext.Provider value={{
+            showComingSoonModal, setShowComingSoonModal,
+
             openMobileDrawer, setOpenMobileDrawer,
 
             searchBarQuery, setSearchBarQuery,

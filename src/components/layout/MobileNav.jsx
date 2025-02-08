@@ -44,7 +44,7 @@ const MobileNav = () => {
   };
 
   const isNewsOrBlogPage = (pathname) => {
-    return pathname.startsWith('/story') || pathname.startsWith('/blog');
+    return pathname.startsWith('/news') || pathname.startsWith('/blog');
   };
 
   const navigation = [

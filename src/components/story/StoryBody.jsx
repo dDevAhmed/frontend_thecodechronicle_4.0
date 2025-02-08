@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useContext } from 'react'
-import { capitalizeWords } from '../../utils/capitalize'
 import Button from '../../ui/Button';
 import StoryContext from '../../contexts/StoryContext';
 import StoryCardActions from './card/StoryCardActions'

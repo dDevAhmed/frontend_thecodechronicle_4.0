@@ -30,7 +30,8 @@ const signIn = async ({ email, password }) => {
 
 export const useSignIn = () => {
 
-    const { login, setShowAuthModal } = useContext(AuthContext);
+    const { login } = useContext(AuthContext);
+    const { setShowAuthModal } = useContext(AuthContext);
 
     return useMutation({
         mutationFn: signIn,
