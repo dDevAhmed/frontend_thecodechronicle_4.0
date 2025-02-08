@@ -9,14 +9,21 @@ export const StoryProvider = ({ children }) => {
     const [showStoryCommentsModal, setShowStoryCommentsModal] = useState(false)
     const [showStoryCommentSendButton, setShowStoryCommentSendButton] = useState(false);
 
+    // story
+    const [likePost, setLikePost] = useState(false);
+    const [bookmarkPost, setBookmarkPost] = useState(false);
+
     return (
         <StoryContext.Provider value={{
             // data,
             // isLoading,
             // error,
-            
+
             showStoryCommentsModal, setShowStoryCommentsModal,
             showStoryCommentSendButton, setShowStoryCommentSendButton,
+
+            likePost, setLikePost,
+            bookmarkPost, setBookmarkPost,
 
         }}>
             {children}
