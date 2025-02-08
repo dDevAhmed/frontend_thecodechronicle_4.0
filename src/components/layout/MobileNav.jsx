@@ -87,7 +87,8 @@ const MobileNav = () => {
     { name: 'explore', href: '/explore', icon: TbCompass, current: false, visible: !isStoryPage(location.pathname) },
     { name: 'search', href: '', icon: TbSearch, current: false, visible: !isStoryPage(location.pathname), onclick: handleSearch },
     {
-      name: 'saved', href: '/saved', icon: bookmarkPost ? TbBookmarkFilled : TbBookmark, current: false, visible: true, onclick: handleBookmarkPost, bookmarked: isStoryPage(location.pathname) && bookmarkPost,
+      // name: 'saved', href: '/saved', icon: bookmarkPost ? TbBookmarkFilled : TbBookmark, current: false, visible: true, onclick: handleBookmarkPost, bookmarked: isStoryPage(location.pathname) && bookmarkPost,
+      name: 'saved', href: '/saved', icon: TbBookmark, current: false, visible: true, onclick: handleBookmarkPost, bookmarked: isStoryPage(location.pathname) && bookmarkPost,
     },
     { name: 'share', href: '', icon: TbShare, current: false, visible: isStoryPage(location.pathname), onclick: handleSharePost },
     { name: 'account', href: '', icon: TbUser, current: false, visible: true, onclick: handleGotoProfile },

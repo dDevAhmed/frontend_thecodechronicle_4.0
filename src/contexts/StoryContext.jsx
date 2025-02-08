@@ -10,8 +10,24 @@ export const StoryProvider = ({ children }) => {
     const [showStoryCommentSendButton, setShowStoryCommentSendButton] = useState(false);
 
     // story
-    const [likePost, setLikePost] = useState(false);
-    const [bookmarkPost, setBookmarkPost] = useState(false);
+    const [likedPosts, setLikedPosts] = useState(new Map()); // Map<postId, boolean>
+    const [bookmarkedPosts, setBookmarkedPosts] = useState(new Map()); // Map<postId, boolean>
+
+    const toggleLikePost = (postId) => {
+        setLikedPosts((prev) => {
+            const newLikedPosts = new Map(prev);
+            newLikedPosts.set(postId, !prev.get(postId)); // Toggle like state
+            return newLikedPosts;
+        });
+    };
+
+    const toggleBookmarkPost = (postId) => {
+        setBookmarkedPosts((prev) => {
+            const newBookmarkedPosts = new Map(prev);
+            newBookmarkedPosts.set(postId, !prev.get(postId)); // Toggle bookmark state
+            return newBookmarkedPosts;
+        });
+    };
 
     return (
         <StoryContext.Provider value={{
@@ -22,8 +38,10 @@ export const StoryProvider = ({ children }) => {
             showStoryCommentsModal, setShowStoryCommentsModal,
             showStoryCommentSendButton, setShowStoryCommentSendButton,
 
-            likePost, setLikePost,
-            bookmarkPost, setBookmarkPost,
+            likedPosts,
+            bookmarkedPosts,
+            toggleLikePost,
+            toggleBookmarkPost,
 
         }}>
             {children}

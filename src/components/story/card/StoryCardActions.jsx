@@ -1,49 +1,63 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
-import React, { useContext } from 'react'
-import Button from '../../../ui/Button'
-import { PiBookmarkSimpleLight, PiShareFatLight, PiThumbsUp } from 'react-icons/pi'
+import React, { useContext } from 'react';
+import Button from '../../../ui/Button';
+import { PiBookmarkSimpleLight, PiShareFatLight, PiThumbsUp } from 'react-icons/pi';
 import AppContext from '../../../contexts/AppContext';
-import StoryContext from '../../../contexts/StoryContext';
+import { StoryContext } from '../../../contexts/StoryContext'; // Import the updated context
+import touchSoundFile from '../../../assets/sounds/pop-2.mp3';
 
 const StoryCardActions = ({ post, classNames }) => {
+    const touchSound = new Audio(touchSoundFile);
 
-    const {
-        showComingSoonModal, setShowComingSoonModal
-    } = useContext(AppContext);
+    const { setShowComingSoonModal } = useContext(AppContext);
+    const { likedPosts, bookmarkedPosts, toggleLikePost, toggleBookmarkPost } = useContext(StoryContext);
 
-    const {
-        likePost, setLikePost,
-        bookmarkPost, setBookmarkPost
-    } = useContext(StoryContext);
+    const isLiked = likedPosts.get(post.id) || false; // Check if the post is liked
+    const isBookmarked = bookmarkedPosts.get(post.id) || false; // Check if the post is bookmarked
 
     const handleLikeButtonClicked = () => {
-        // increment/decrement post like count
-        // set post like state
-        setLikePost(!likePost);
-    }
+        toggleLikePost(post.id); // Toggle like state for this post
+        touchSound.play()
+            .catch((error) => {
+                console.error('Failed to play sound:', error);
+            });
+    };
 
     const handleBookmarkButtonClicked = () => {
-        // set bookmark state
-        setBookmarkPost(!bookmarkPost);
-    }
+        toggleBookmarkPost(post.id); // Toggle bookmark state for this post
+        touchSound.play()
+            .catch((error) => {
+                console.error('Failed to play sound:', error);
+            });
+    };
 
     return (
         <div className={`flex items-center justify-center lg:justify-end gap-3 ${classNames}`}>
-            <Button classNames={`text-lg border rounded-2xl p-5 flex items-center gap-1 text-gray-600 hover:bg-brand-background-gray ${likePost && 'bg-brand-primary-blue text-white hover:text-brand-primary-white hover:bg-brand-primary-blue'}`} title={'save'} onClick={handleLikeButtonClicked}>
+            <Button
+                classNames={`text-lg border rounded-2xl p-5 flex items-center gap-1 text-gray-600 hover:bg-brand-background-gray ${isLiked && 'bg-brand-primary-blue text-white hover:text-brand-primary-white hover:bg-brand-primary-blue'}`}
+                title={'save'}
+                onClick={handleLikeButtonClicked}
+            >
                 <PiThumbsUp className='h-5 w-auto' />
-                {likePost ? 'Liked' : 'Like'}
+                {isLiked ? 'Liked' : 'Like'}
             </Button>
-            <Button classNames={`text-lg border rounded-2xl p-5 flex items-center gap-1 text-gray-600 hover:bg-brand-background-gray ${bookmarkPost && 'bg-brand-primary-blue text-white hover:text-brand-primary-white hover:bg-brand-primary-blue'}`} title={'save'} onClick={handleBookmarkButtonClicked}>
+            <Button
+                classNames={`text-lg border rounded-2xl p-5 flex items-center gap-1 text-gray-600 hover:bg-brand-background-gray ${isBookmarked && 'bg-brand-primary-blue text-white hover:text-brand-primary-white hover:bg-brand-primary-blue'}`}
+                title={'save'}
+                onClick={handleBookmarkButtonClicked}
+            >
                 <PiBookmarkSimpleLight className='h-5 w-auto' />
-                {bookmarkPost ? 'Bookmarked' : 'Bookmark'}
+                {isBookmarked ? 'Bookmarked' : 'Bookmark'}
             </Button>
-            <Button classNames={'text-lg border rounded-2xl p-5 flex items-center gap-1 text-gray-600 hover:bg-brand-background-gray'} title={'share'} onClick={() => setShowComingSoonModal(true)}>
+            <Button
+                classNames={'text-lg border rounded-2xl p-5 flex items-center gap-1 text-gray-600 hover:bg-brand-background-gray'}
+                title={'share'}
+                onClick={() => setShowComingSoonModal(true)}
+            >
                 <PiShareFatLight className='h-5 w-auto' />
                 Share
             </Button>
         </div>
-    )
-}
+    );
+};
 
-export default StoryCardActions
+export default StoryCardActions;
