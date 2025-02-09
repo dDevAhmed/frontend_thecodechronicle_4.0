@@ -1,7 +1,6 @@
 'use client'
 
-import { Outlet, useLocation, Link } from "react-router-dom";
-import { GoDotFill } from "react-icons/go";
+import { Outlet, useLocation } from "react-router-dom";
 import MobileDrawer from '../components/layout/MobileDrawer';
 import Header from '../components/layout/Header';
 import MobileNav from '../components/layout/MobileNav'
@@ -12,6 +11,7 @@ import DesktopNavigation from "../components/layout/DesktopNavigation";
 import MobileSearchModal from "../components/modals/MobileSearchModal";
 import AuthModal from "../components/modals/auth/AuthModal";
 import ComingSoon from "../components/modals/ComingSoon";
+import AboutTermsPrivacy from "../components/layout/AboutTermsPrivacy";
 
 export default function Layout() {
     const location = useLocation()
@@ -53,13 +53,7 @@ export default function Layout() {
                         </Card>
                     </div>
 
-                    <div className='fixed bottom-5 flex items-center gap-3'>
-                        <Link to={''} className='text-sm'>About</Link>
-                        <GoDotFill className='h-2 w-auto text-gray-600' />
-                        <Link to={''} className='text-sm'>Privacy</Link>
-                        <GoDotFill className='h-2 w-auto text-gray-600' />
-                        <Link to={''} className='text-sm'>Terms</Link>
-                    </div>
+                    <AboutTermsPrivacy />
 
                     {/* medium screen  */}
                     {/* navigation, trending topics, weather */}
