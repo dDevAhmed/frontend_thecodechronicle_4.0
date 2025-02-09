@@ -3,6 +3,7 @@ import { lazy, Suspense } from 'react';
 import Spinner from '../../ui/Spinner';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useStories } from '../../services/StoryService';
+import StoryCardMaxiSkeleton from '../skeletons/StoryCardMaxiSkeleton';
 // import StoryContext from '../../contexts/StoryContext';
 
 const LazyStoryCardMaxi = lazy(() => import('../cards/StoryCardMaxi'));
@@ -17,7 +18,7 @@ const StoriesList = () => {
             dataLength={data?.items.length || 0}
             // next={() => fetchMoreStories('feed')}        //fixme - implement
             hasMore={true}
-            loader={<div className='p-10'><Spinner /></div>}
+            loader={<div className='py-5'><StoryCardMaxiSkeleton /></div>}
             endMessage={
                 <p className='p-10 text-gray-500 text-center font-medium'>
                     Yay! You have seen it all
