@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HiOutlineBell } from "react-icons/hi2";
 import { GoDotFill } from "react-icons/go";
 import { TbUser } from "react-icons/tb";
@@ -16,8 +16,11 @@ import AuthContext from "../../contexts/AuthContext";
 import DefaultAvatar from '../../assets/images/default_avatar.png'
 
 const Header = () => {
+    const navigate = useNavigate();
+
     const { loggedIn } = useAuthStatusHook();
-    const { authUser } = useContext(AuthContext);
+    const { authUser, setShowAuthModal } = useContext(AuthContext);
+    const { setIntendedPath } = useContext(AppContext);
 
     const {
         setOpenMobileDrawer,
@@ -25,6 +28,17 @@ const Header = () => {
     } = useContext(AppContext)
 
     const [headerSearchBarQuery, setHeaderSearchBarQuery] = useState('');
+
+    const handleGotoAccount = () => {
+
+        if (loggedIn) {
+            navigate('/account');
+        } else {
+            // Store the intended path before showing the auth modal
+            setIntendedPath('/account');
+            setShowAuthModal(true);
+        }
+    };
 
     return (
         <header className="bg-brand-background-gray shrink-0 p-[1.125rem] w-full">
@@ -72,7 +86,10 @@ const Header = () => {
                         <GoDotFill className="h-5 w-auto absolute top-1 right-2 text-red-500" />
                     </Button>
 
-                    <Link to="/account" className="hidden md:flex -m-1.5 p-1.5 items-center gap-2">
+                    <Link
+                        to="#"
+                        className="hidden md:flex -m-1.5 p-1.5 items-center gap-2"
+                        onClick={handleGotoAccount}>
                         <span className="sr-only">Your profile</span>
                         {
                             loggedIn ? (

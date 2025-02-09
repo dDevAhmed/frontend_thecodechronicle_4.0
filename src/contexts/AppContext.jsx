@@ -7,6 +7,9 @@ export const AppContext = createContext();
 export const AppProvider = ({ children }) => {
     // const { data, isLoading, error } = useWeather()
 
+    // for routing to privates routes
+    const [intendedPath, setIntendedPath] = useState(null);
+
     const [showComingSoonModal, setShowComingSoonModal] = useState(false)
 
     const [openMobileDrawer, setOpenMobileDrawer] = useState(false)
@@ -23,6 +26,8 @@ export const AppProvider = ({ children }) => {
 
     return (
         <AppContext.Provider value={{
+            intendedPath, setIntendedPath,
+            
             showComingSoonModal, setShowComingSoonModal,
 
             openMobileDrawer, setOpenMobileDrawer,

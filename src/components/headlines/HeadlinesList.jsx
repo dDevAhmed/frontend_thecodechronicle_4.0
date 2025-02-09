@@ -10,6 +10,8 @@ const HeadlinesList = () => {
 
     const { data, isPending, isError } = useHeadlines()
 
+    // isPending - spinner
+
     return (
 
         <div className="snap-x snap-mandatory flex gap-3 overflow-x-auto hide-scrollbar scroll-smooth py-1 md:snap-none">

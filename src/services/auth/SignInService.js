@@ -1,7 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
 import { useContext } from 'react';
 import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 import AuthContext from '../../contexts/AuthContext';
+import AppContext from '../../contexts/AppContext';
 
 const api = import.meta.env.VITE_API_URL
 
@@ -21,7 +23,7 @@ const signIn = async ({ email, password }) => {
         if (!response.ok) {
             throw new Error(data?.response.message || 'Failed to sign in, try again');
         }
-        
+
         return data;
     } catch (error) {
         throw new Error(error.message);
@@ -29,7 +31,9 @@ const signIn = async ({ email, password }) => {
 };
 
 export const useSignIn = () => {
+    const navigate = useNavigate();
 
+    const { intendedPath, setIntendedPath } = useContext(AppContext);
     const { setShowAuthModal, login } = useContext(AuthContext);
 
     return useMutation({
@@ -39,6 +43,12 @@ export const useSignIn = () => {
                 login(data.access_token);
                 setShowAuthModal(false);
                 toast.success('Sign-in successful!');
+
+                // Navigate to the intended path after successful sign-in
+                if (intendedPath) {
+                    navigate(intendedPath);
+                    setIntendedPath(null); // Clear the intended path after navigation
+                }
             }
         },
         onError: (error) => {

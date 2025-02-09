@@ -4,7 +4,7 @@ import { Flex, Skeleton, Space } from "antd";
 const StoryCardMaxiSkeleton = () => {
     const [active] = useState(true);
     const [size] = useState("default");
-    const [block] = useState(true);
+    // const [block] = useState(true);
 
     return (
         <Flex gap="middle" vertical style={{ width: "100%" }}>
