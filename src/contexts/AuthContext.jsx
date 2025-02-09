@@ -2,10 +2,12 @@
 /* eslint-disable react/prop-types */
 import { jwtDecode } from 'jwt-decode';
 import { useState, createContext, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+
     // auth
     const [showAuthModal, setShowAuthModal] = useState(false)
     const [showSignInForm, setShowSignInForm] = useState(true)      //to be the default view, change back
@@ -39,13 +41,14 @@ export const AuthProvider = ({ children }) => {
         } catch (error) {
             setAuthToken(null);
             throw new Error("Error finding user", error);
-            
+
         }
     };
 
     const logout = () => {
         setAuthToken('');
         setAuthUser(null);
+        setShowAuthModal(false);        //just in case
     };
 
     // const hasRole = (role) => {
@@ -63,7 +66,7 @@ export const AuthProvider = ({ children }) => {
             showRegisterEmailForm, setShowRegisterEmailForm,
             showVerifyEmailForm, setShowVerifyEmailForm,
             showSignUpForm, setShowSignUpForm,
-            
+
             authToken, authUser, login, logout, hasRole,
             registrationEmail, setRegistrationEmail
         }}>

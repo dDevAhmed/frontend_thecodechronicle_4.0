@@ -1,11 +1,12 @@
 import React, { useContext } from 'react'
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { TbSmartHome, TbCompass, TbArticle, TbBookmark, TbLogout, TbUser, TbThumbUp, TbShare, TbShare2 } from "react-icons/tb";
 import { GoDotFill } from "react-icons/go";
 import useAuthStatusHook from '../../hooks/useAuthStatusHook';
 import AppContext from '../../contexts/AppContext';
 import Button from '../../ui/Button';
 import AuthContext from '../../contexts/AuthContext';
+import { privateRoute } from '../../utils/privateRoute';
 
 const navigation = [
     { name: 'home', href: '/', icon: TbSmartHome, current: false },
@@ -19,7 +20,10 @@ function classNames(...classes) {
 }
 
 const DesktopNavigation = () => {
+    const location = useLocation()
     const navigate = useNavigate();
+
+    const currentRoute = location.pathname.split('/')[1];
 
     const { loggedIn } = useAuthStatusHook();
     const { logout, setShowAuthModal } = useContext(AuthContext)
@@ -33,6 +37,14 @@ const DesktopNavigation = () => {
         } else {
             navigate(href); // Navigate to the intended path
         }
+    };
+
+    const handleLogout = () => {
+        if (privateRoute(currentRoute)) {
+            logout();
+            navigate('/');
+        }
+        logout();
     };
 
     return (
@@ -72,7 +84,7 @@ const DesktopNavigation = () => {
                 {loggedIn && (
                     <li className="mt-auto border-t">
                         <Button
-                            onClick={logout}
+                            onClick={handleLogout}
                             classNames={
                                 'group w-full -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-brand-primary-black hover:bg-gray-100 hover:text-brand-primary-blue'
                             }

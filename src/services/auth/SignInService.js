@@ -33,7 +33,7 @@ const signIn = async ({ email, password }) => {
 export const useSignIn = () => {
     const navigate = useNavigate();
 
-    const { intendedPath, setIntendedPath } = useContext(AppContext);
+    const { intendedPath, setIntendedPath, setOpenMobileDrawer } = useContext(AppContext);
     const { setShowAuthModal, login } = useContext(AuthContext);
 
     return useMutation({
@@ -43,6 +43,7 @@ export const useSignIn = () => {
                 login(data.access_token);
                 setShowAuthModal(false);
                 toast.success('Sign-in successful!');
+                setOpenMobileDrawer(false)
 
                 // Navigate to the intended path after successful sign-in
                 if (intendedPath) {

@@ -2,7 +2,7 @@ import { Dialog, DialogBackdrop, DialogPanel, TransitionChild } from '@headlessu
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { useContext } from 'react'
 import { TbLogout } from "react-icons/tb";
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { TbSmartHome, TbCompass, TbArticle, TbBookmark, TbUser, TbThumbUp, TbShare, TbShare2 } from "react-icons/tb";
 import { HiOutlineFire } from "react-icons/hi";
 import AppContext from '../../contexts/AppContext'
@@ -10,11 +10,13 @@ import AppLogo from '../../assets/images/TestLogo.png'
 import useAuthStatusHook from '../../hooks/useAuthStatusHook';
 import AboutTermsPrivacy from './AboutTermsPrivacy';
 import Button from '../../ui/Button';
+import AuthContext from '../../contexts/AuthContext';
+import { privateRoute } from '../../utils/privateRoute';
 
 const navigation = [
     { name: 'home', href: '/', icon: TbSmartHome, current: false },
-    { name: 'blogs', href: '', icon: TbArticle, current: false },
-    { name: 'saved', href: '/saved', icon: TbBookmark, current: false },
+    { name: 'blogs', href: '/blogs', icon: TbArticle, current: false },
+    { name: 'saved', href: '/saved', icon: TbBookmark, current: false, private: true },
 ]
 
 function classNames(...classes) {
@@ -23,15 +25,36 @@ function classNames(...classes) {
 
 const MobileDrawer = () => {
     const location = useLocation()
+    const navigate = useNavigate();
+
+    const currentRoute = location.pathname.split('/')[1];
 
     const { loggedIn } = useAuthStatusHook();
-    const { openMobileDrawer, setOpenMobileDrawer, logout } = useContext(AppContext)
+    const {
+        openMobileDrawer, setOpenMobileDrawer,
+        intendedPath, setIntendedPath
+    } = useContext(AppContext)
+    const { logout, setShowAuthModal } = useContext(AuthContext)
 
-    // todo - check back
+    const handleNavigation = (href, isPrivate) => (e) => {
+        if (isPrivate && !loggedIn) {
+            e.preventDefault(); // Prevent default navigation
+            setIntendedPath(href); // Store the intended path
+            setShowAuthModal(true); // Show the auth modal
+        } else {
+            navigate(href); // Navigate to the intended path
+            setOpenMobileDrawer(false)
+        }
+    };
+
     const handleLogout = () => {
-        logout()
-        setOpenMobileDrawer(false)
-    }
+        if (privateRoute(currentRoute)) {
+            logout();
+            navigate('/');
+            setOpenMobileDrawer(false)
+        }
+        logout();
+    };
 
     return (
         <Dialog open={openMobileDrawer} onClose={setOpenMobileDrawer} className="relative z-50 lg:hidden">
@@ -68,8 +91,9 @@ const MobileDrawer = () => {
                                     <ul role="list" className="-mx-2 space-y-1">
                                         {navigation.map((item) => (
                                             <li key={item.name}>
-                                                <a
-                                                    href={item.href}
+                                                <Link
+                                                    to={item.href}
+                                                    onClick={handleNavigation(item.href, item.private)} // Intercept click event
                                                     className={classNames(
                                                         location.pathname === item.href
                                                             ? 'bg-brand-primary-blue text-brand-primary-white'
@@ -85,7 +109,7 @@ const MobileDrawer = () => {
                                                         )}
                                                     />
                                                     {item.name}
-                                                </a>
+                                                </Link>
                                             </li>
                                         ))}
                                     </ul>
