@@ -7,6 +7,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import AuthContext from '../../contexts/AuthContext';
 import AppContext from '../../contexts/AppContext';
 import StoryContext from '../../contexts/StoryContext';
+import useAuthStatusHook from '../../hooks/useAuthStatusHook';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -17,12 +18,12 @@ const MobileNav = () => {
   const location = useLocation()
   const navigate = useNavigate();
 
-  const post = location.pathname.split('/')[2];
-  // console.log('post', post)
+  // const currentPage = location.pathname.split('/')[2];
+
+  const { loggedIn } = useAuthStatusHook();
 
   const { setShowAuthModal } = useContext(AuthContext) || {};
-  const { setShowMobileSearchModal } = useContext(AppContext) || {};
-
+  const { setShowMobileSearchModal, setIntendedPath } = useContext(AppContext) || {};
   const {
     likePost, setLikePost,
     bookmarkPost, setBookmarkPost
@@ -71,10 +72,14 @@ const MobileNav = () => {
     setShowMobileSearchModal(true)
   };
 
-  const handleGotoProfile = () => {
-    // check if user is sign in, 
-    // else open auth modal
-    setShowAuthModal(true)    //todo - refine logic
+  const handleGotoAccount = () => {
+    if (loggedIn) {
+      navigate('/account');
+    } else {
+      // Store the intended path before showing the auth modal
+      setIntendedPath('/account');
+      setShowAuthModal(true);
+    }
   };
 
   const isStoryPage = (pathname) => {
@@ -91,11 +96,11 @@ const MobileNav = () => {
       name: 'saved', href: '/saved', icon: TbBookmark, current: false, visible: true, onclick: handleBookmarkPost, bookmarked: isStoryPage(location.pathname) && bookmarkPost,
     },
     { name: 'share', href: '', icon: TbShare, current: false, visible: isStoryPage(location.pathname), onclick: handleSharePost },
-    { name: 'account', href: '', icon: TbUser, current: false, visible: true, onclick: handleGotoProfile },
+    { name: 'account', href: '/account', icon: TbUser, current: false, visible: true, onclick: handleGotoAccount },
   ];
 
   return (
-    // fixme - add in mobile - w-[100vw]
+    // fixme - add in mobile - w-[100vw], change back to Link all - no button
     <Card classNames={'bg-white py-3 px-5 flex justify-between items-center gap-1 border border-t-brand-primary-blue'}>
       {navigation.map((item, index) => (
         item.visible && (item.onclick
@@ -137,9 +142,9 @@ const MobileNav = () => {
                 'h-6 w-auto shrink-0',
               )}
             />
-          </Link>)
-      ))
-      }
+          </Link>
+        )
+      ))}
     </Card >
   )
 }
