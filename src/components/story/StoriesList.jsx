@@ -38,7 +38,7 @@ const StoriesList = () => {
             <div className='flex flex-col gap-5'>
                 {
                     data?.items.map((story, index) => (
-                        <Suspense fallback={<div className='p-5'><Spinner /></div>} key={index}>
+                        <Suspense fallback={<div className='p-5'><StoryCardMaxiSkeleton /></div>} key={index}>
                             <LazyStoryCardMaxi post={story} />
                         </Suspense>
                     ))

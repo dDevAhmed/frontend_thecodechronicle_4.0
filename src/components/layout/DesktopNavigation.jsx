@@ -1,7 +1,10 @@
-import React from 'react'
+import { useContext } from 'react'
 import { Link } from "react-router-dom";
 import { TbSmartHome, TbCompass, TbArticle, TbBookmark, TbLogout, TbUser, TbThumbUp, TbShare, TbShare2 } from "react-icons/tb";
 import { GoDotFill } from "react-icons/go";
+import useAuthStatusHook from '../../hooks/useAuthStatusHook';
+import AppContext from '../../contexts/AppContext';
+import Button from '../../ui/Button';
 
 const navigation = [
     { name: 'home', href: '/', icon: TbSmartHome, current: false },
@@ -15,6 +18,10 @@ function classNames(...classes) {
 }
 
 const DesktopNavigation = () => {
+
+    const { loggedIn } = useAuthStatusHook();
+    const { logout } = useContext(AppContext)
+
     return (
         <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -48,18 +55,22 @@ const DesktopNavigation = () => {
                         ))}
                     </ul>
                 </li>
-                <li className="mt-auto border-t">
-                    <Link
-                        href="#"
-                        className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-brand-primary-black hover:bg-gray-100 hover:text-brand-primary-blue"
-                    >
-                        <TbLogout
-                            aria-hidden="true"
-                            className="h-6 w-6 shrink-0 text-brand-primary-black group-hover:text-brand-primary-blue"
-                        />
-                        Logout
-                    </Link>
-                </li>
+                {
+                    loggedIn && (
+                        <li className="mt-auto border-t">
+                            <Button
+                                onClick={logout}
+                                classNames={"group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-brand-primary-black hover:bg-gray-100 hover:text-brand-primary-blue"}
+                            >
+                                <TbLogout
+                                    aria-hidden="true"
+                                    className="h-6 w-6 shrink-0 text-brand-primary-black group-hover:text-brand-primary-blue"
+                                />
+                                Logout
+                            </Button>
+                        </li>
+                    )
+                }
             </ul>
         </nav>
     )
