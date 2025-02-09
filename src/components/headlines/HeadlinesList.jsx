@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import Spinner from '../../ui/Spinner'
 import { useHeadlines } from '../../services/StoryService';
 import HeadlineItemSkeleton from '../skeletons/HeadlineItemSkeleton';
+import Card from '../../ui/Card';
 
 const LazyHeadlineItem = lazy(() => import("./HeadlineItem"));
 
@@ -17,22 +18,18 @@ const HeadlinesList = () => {
                 data?.items.map((story, index) => (
                     <Suspense key={index}
                         fallback={
-                            <div className='flex items-center justify-center p-10'>
-                                {/* <Spinner /> */}
+                            <Card classNames={'rounded-2xl p-5 bg-white snap-center shrink-0 w-11/12 md:w-96 lg:w-60'} key={index}>
                                 <HeadlineItemSkeleton />
-                            </div>
+                            </Card>
                         }
                     >
-                        <div
-
-                            className="snap-center shrink-0 w-11/12 md:w-96 lg:w-60"
-                        >
+                        <div className="snap-center shrink-0 w-11/12 md:w-96 lg:w-60">
                             <LazyHeadlineItem headline={story} />
                         </div>
                     </Suspense>
                 ))
             }
-        </div>
+        </div >
     );
 
 };

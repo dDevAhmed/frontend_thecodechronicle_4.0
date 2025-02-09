@@ -17,18 +17,22 @@ const StoryCardActions = ({ post, classNames }) => {
 
     const handleLikeButtonClicked = () => {
         toggleLikePost(post.id); // Toggle like state for this post
-        touchSound.play()
-            .catch((error) => {
-                console.error('Failed to play sound:', error);
-            });
+        !isLiked && (
+            touchSound.play()
+                .catch((error) => {
+                    console.error('Failed to play sound:', error);
+                })
+        )
     };
 
     const handleBookmarkButtonClicked = () => {
         toggleBookmarkPost(post.id); // Toggle bookmark state for this post
-        touchSound.play()
-            .catch((error) => {
-                console.error('Failed to play sound:', error);
-            });
+        !isBookmarked && (
+            touchSound.play()
+                .catch((error) => {
+                    console.error('Failed to play sound:', error);
+                })
+        )
     };
 
     return (

@@ -5,22 +5,12 @@ const HeadlineItemSkeleton = () => {
     const [size, setSize] = useState('default');
 
     return (
-        <Flex gap="middle" vertical>
-            <Space>
-                <Skeleton.Input
-                    active={active}
-                    size={size}
-                    style={{
-                        width: 200,
-                    }} />
+        <Flex gap="middle" vertical style={{ width: "100%" }}>
+            <Space style={{ width: "100%" }} direction="vertical">
+                <Skeleton.Button active={active} size={size} shape="default" block />
             </Space>
-            <Space>
-                <Skeleton.Node
-                    active={active}
-                    style={{
-                        width: 200,
-                    }}
-                />
+            <Space style={{ width: "100%" }} direction="vertical">
+                <Skeleton.Button active={active} size={size} shape="default" block style={{ height: 100 }} />
             </Space>
             <Space>
                 <Skeleton.Button active={active} size={size} shape={'round'} />
