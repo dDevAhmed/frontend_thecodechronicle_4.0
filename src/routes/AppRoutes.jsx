@@ -12,6 +12,7 @@ import CreateStory from "../pages/admin/CreateStory"
 import Story from '../pages/Story'
 import OtpInputCmp from "../components/formelements/OtpInputCmp"
 import Account from "../pages/Account"
+import Blogs from "../pages/Blogs"
 
 const router = createBrowserRouter([
     // /post/new -> add new post (protected, admin layout)
@@ -35,10 +36,10 @@ const router = createBrowserRouter([
                 path: 'explore',
                 element: <Explore />
             },
-            // {
-            //     path: 'blogs',
-            //     element: <Blogs />
-            // },
+            {
+                path: 'blogs',
+                element: <Blogs />
+            },
             {
                 path: 'story/:slugTitle',
                 element: <Story />
