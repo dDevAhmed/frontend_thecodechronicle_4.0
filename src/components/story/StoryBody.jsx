@@ -5,9 +5,11 @@ import StoryContext from '../../contexts/StoryContext';
 import StoryCardActions from './card/StoryCardActions'
 import DOMPurify from 'dompurify';
 import StoryCardVideoView from './card/StoryCardVideoView';
+import AppContext from '../../contexts/AppContext';
 
 const StoryBody = ({ post }) => {
 
+  const { setShowComingSoonModal } = useContext(AppContext);
   const { setShowStoryCommentsModal } = useContext(StoryContext)
   const sanitizedMessage = DOMPurify.sanitize(post?.message);
 
@@ -32,7 +34,7 @@ const StoryBody = ({ post }) => {
 
         <div className='flex justify-center md:justify-between items-center mt-5'>
           <Button
-            onClick={() => setShowStoryCommentsModal(true)}
+            onClick={() => setShowComingSoonModal(true)}
             classNames={'border border-brand-primary-black text-brand-primary-black py-3 px-5 rounded-2xl text-[1rem]'}
           >
             125 comments

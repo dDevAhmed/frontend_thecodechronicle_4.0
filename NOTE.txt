@@ -22,6 +22,7 @@ fixme
 11. install tinymce editor locally for slow/failed network
 12. ERROR RESPONSES
 13. use avatar utils for user default avatar
+14. fixing pages header section
 
 note
 1 manifest.json was added to remove browser's address bar and mobile navigation
