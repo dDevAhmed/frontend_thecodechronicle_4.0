@@ -39,7 +39,7 @@ const CreateStoryForm = () => {
         },
         onSubmit: async ({ value }) => {
             console.log('CreateStoryForm - Form values:', value);
-
+            
             if (value.primaryMedia?.file) {
                 try {
                     const uploadedMediaUrl = await uploadMedia(value.primaryMedia.file);

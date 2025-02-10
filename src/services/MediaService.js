@@ -8,10 +8,20 @@ const apiKey = import.meta.env.VITE_MEDIA_CLOUD_API_KEY;
 
 // upload media
 const uploadMedia = async (file) => {
+    let preset;
+
+    if (file.type.startsWith('image/')) {
+        preset = 'story_image_preset';
+    }
+    else if (file.type.startsWith('video/')) {
+        preset = 'story_video_preset';
+    } else {
+        throw new Error('Unsupported file type. Please upload an image or video.');
+    }
 
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('upload_preset', 'story_primary_media');
+    formData.append('upload_preset', preset);
 
     try {
         const response = await fetch(uploadEndpoint, {
@@ -19,11 +29,12 @@ const uploadMedia = async (file) => {
             body: formData,
         });
 
+        const data = await response.json();
+
         if (!response.ok) {
             throw new Error(data?.message || 'Failed to upload file, try again');
         }
 
-        const data = await response.json();
         return data.secure_url;
 
     } catch (error) {

@@ -20,7 +20,7 @@ const Header = () => {
 
     const { loggedIn } = useAuthStatusHook();
     const { authUser, setShowAuthModal } = useContext(AuthContext);
-    const { setIntendedPath } = useContext(AppContext);
+    const { setIntendedPath, setShowComingSoonModal } = useContext(AppContext);
 
     const {
         setOpenMobileDrawer,
@@ -80,7 +80,10 @@ const Header = () => {
                 </div>
 
                 <div className="flex items-center gap-x-2">
-                    <Button classNames={'relative'}>
+                    <Button
+                        classNames={'relative'}
+                        onClick={() => setShowComingSoonModal(true)}
+                    >
                         <HiOutlineBell className='h-8 w-auto text-gray-500' />
                         {/* //fixme - shown only if notification  */}
                         <GoDotFill className="h-5 w-auto absolute top-1 right-2 text-red-500" />
