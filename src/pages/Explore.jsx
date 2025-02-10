@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import Categories from '../components/Categories'
 // import Card from '../ui/Card';
 // import SearchBar from '../ui/SearchBar';
@@ -7,9 +7,11 @@ import PageTitle from '../ui/PageTitle';
 import AppContext from '../contexts/AppContext';
 
 const Explore = () => {
-    // fixme - not a good approach - land at the top by default
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    
+    // always land at the top of the page
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'auto' });
+    }, []);
+
     const { initiateExploreSearch } = useContext(AppContext);
 
     return (

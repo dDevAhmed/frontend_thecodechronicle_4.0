@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import StoryHeader from '../components/story/StoryHeader'
 import StoryBody from '../components/story/StoryBody'
@@ -6,8 +7,10 @@ import Spinner from '../ui/Spinner';
 import { useStory } from '../services/StoryService';
 
 const Story = () => {
-    // fixme - not a good approach - land at the top by default
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // always land at the top of the page
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'auto' });
+    }, []);
 
     const { slugTitle } = useParams()
 

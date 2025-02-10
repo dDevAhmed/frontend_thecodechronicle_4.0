@@ -3,10 +3,14 @@ import Card from '../ui/Card';
 import SearchBar from '../ui/SearchBar';
 // import StoryCardMini from '../components/cards/StoryCardMini';
 import PageTitle from '../ui/PageTitle';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import AppContext from '../contexts/AppContext';
 
 const Saved = () => {
+  // always land at the top of the page
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }, []);
 
   const { initiateSavedSearch, setInitiateSavedSearch } = useContext(AppContext)
   const [savedSearchBarQuery, setSavedSearchBarQuery] = useState('');

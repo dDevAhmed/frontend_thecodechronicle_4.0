@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import PageTitle from '../ui/PageTitle';
 import AppContext from '../contexts/AppContext';
 import BlogCard from '../components/cards/BlogCard';
@@ -104,8 +105,10 @@ const dummyBlogs = [
 ];
 
 const Blogs = () => {
-    // fixme - not a good approach - land at the top by default
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // always land at the top of the page
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'auto' });
+    }, []);
 
     return (
         <div className='flex flex-col gap-5 pb-20'>
