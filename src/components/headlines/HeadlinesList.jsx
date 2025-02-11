@@ -1,5 +1,4 @@
 import { lazy, Suspense } from 'react';
-import Spinner from '../../ui/Spinner'
 import { useHeadlines } from '../../services/StoryService';
 import HeadlineItemSkeleton from '../skeletons/HeadlineItemSkeleton';
 import Card from '../../ui/Card';

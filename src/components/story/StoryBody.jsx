@@ -6,6 +6,7 @@ import StoryCardActions from './card/StoryCardActions'
 import DOMPurify from 'dompurify';
 import StoryCardVideoView from './card/StoryCardVideoView';
 import AppContext from '../../contexts/AppContext';
+import GallerySlider from './GallerySlider';
 
 const StoryBody = ({ post }) => {
 
@@ -21,13 +22,18 @@ const StoryBody = ({ post }) => {
           <div className='w-1/12 h-1 bg-gray-900 rounded-md'></div>
         </div>
 
-        <div className='mb-5'>
-          {
-            post?.type === 'video' && (
-              <StoryCardVideoView post={post} />
-            )
-          }
-        </div>
+        {/* //todo - should be in the header like yt*/}
+        {post?.type === 'video' && (
+          <div className='mb-5'>
+            <StoryCardVideoView post={post} />
+          </div>
+        )}
+
+        {post?.type === 'image' && (
+          post?.secondaryMedia.length > 1 && (
+            <GallerySlider media={post?.secondaryMedia} />
+          )
+        )}
 
         {/* dangerouslySetInnerHTML is used to render html tags in react */}
         <p dangerouslySetInnerHTML={{ __html: sanitizedMessage }} className='text-justify'></p>
@@ -37,6 +43,7 @@ const StoryBody = ({ post }) => {
             onClick={() => setShowComingSoonModal(true)}
             classNames={'border border-brand-primary-black text-brand-primary-black py-3 px-5 rounded-2xl text-[1rem]'}
           >
+            {/* //todo - show count if comments else comment */}
             125 comments
           </Button>
           <div className='hidden md:flex'><StoryCardActions post={post} /></div>
