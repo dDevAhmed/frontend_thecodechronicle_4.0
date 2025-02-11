@@ -33,9 +33,10 @@ const Story = () => {
                 <title>{capitalizeWords(post?.title)}</title>
                 <meta property="og:title" content={capitalizeWords(post?.title)} />
                 {/* //fixme - needs to be generating a description */}
-                <meta property="og:description" content={post?.description || "Explore tech stories from CodeLand—where developers, innovation, and code meet. Stay inspired!"} />
+                <meta property="og:description" content={post?.description || "Explore tech stories from CodeLand — where developers, innovation, and code meet. Stay inspired!"} />
                 {/* //fixme - set default image as the logo if post is video or audio (non image) */}
                 <meta property="og:image" content={post?.primaryMedia.url || "https://thecodechronicle.vercel.app/default-image.jpg"} />
+                {/* //todo - consider changing this for an updated domain */}
                 <meta property="og:url" content={`https://thecodechronicle.vercel.app/story/${post?.slugTitle}`} />
             </Helmet>
 
